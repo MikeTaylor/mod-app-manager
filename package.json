@@ -1,0 +1,27 @@
+{
+  "name": "@indexdata/mod-app-store",
+  "version": "1.0.0",
+  "description": "App-store server for FOLIO",
+  "repository": "MikeTaylor/",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
+  "main": "main.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint -f unix .",
+    "start": "babel-node --presets=env main.js -- -p 3013"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "categorical-logger": "^1.0.0",
+    "node-fetch": "^2.6.7",
+    "node-getopt": "^0.3.2"
+  },
+  "devDependencies": {
+    "@folio/eslint-config-stripes": "^5.2.100061",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0"
+  }
+}

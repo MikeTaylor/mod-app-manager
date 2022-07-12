@@ -1,0 +1,24 @@
+{
+  "id": "${artifactId}-${version}",
+  "name": "App-store server for FOLIO",
+  "provides": [
+    {
+      "id": "app-store",
+      "version": "1.0",
+      "handlers" : [
+        {
+          "methods" : [ "GET" ],
+          "pathPattern" : "/app-store/apps",
+          "permissionsRequired": ["app-store.apps.collection.get"]
+        }
+      ]
+    }
+  ],
+  "permissionSets": [
+    {
+      "permissionName": "app-store.apps.collection.get",
+      "displayName": "App-store - get list of apps",
+      "description": "Get apps collection"
+    }
+  ]
+}
