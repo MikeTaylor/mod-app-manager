@@ -5,7 +5,7 @@ import serveIndex from 'serve-index';
 function serveModAddStore(logger, port) {
   const app = express();
 
-  app.use(function (req, res, next) {
+  app.use((req, res, next) => {
     logger.log('request', req.method, req.url);
     next();
   });
