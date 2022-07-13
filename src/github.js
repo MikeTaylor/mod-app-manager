@@ -6,19 +6,18 @@ async function getSingleApp(octokit, source, name) {
   });
 
   const encoding = file.data.encoding;
-  // XXX should reject if non-base64
+  if (encoding !== 'base64') {
+    throw Error(`app ${name} has non-base64 encoding '${encoding}'`);
+  }
 
-  const content = file.data.content;
-  const cleaned = content.replace(/[\r\n]/g, '');
+  const cleaned = file.data.content.replace(/[\r\n]/g, ''); // Should not be necessary!
   const decoded = atob(cleaned);
-  const json = JSON.parse(decoded);
-  console.log('file', name, `(${encoding})`, '--', json);
-
-  return [name, json];
+  return JSON.parse(decoded);
 }
 
+
 async function getAppsForSource(octokit, source) {
-  const bundle = {};
+  const apps = {};
 
   const directory = await octokit.rest.repos.getContent({
     owner: source.owner,
@@ -26,28 +25,21 @@ async function getAppsForSource(octokit, source) {
     path: 'apps',
   });
 
-  const keys = directory.data.keys();
-  for (const key of keys) {
-    const entry = directory.data[key];
+  for (const entry of directory.data.values()) {
     const app = await getSingleApp(octokit, source, entry.name);
-    const [name, json] = app;
-    bundle[name] = json;
+    apps[app.name] = app;
   }
 
-  return bundle;
+  return apps;
 }
 
 
 async function getAppsFromGitHub(octokit, config) {
   const apps = {};
 
-  const keys = config.keys();
-  for (const key of keys) {
-    const source = config[key];
-    const bundle = await getAppsForSource(octokit, source);
-    console.log('  bundle =', bundle);
-    Object.assign(apps, bundle);
-    console.log('apps =', apps);
+  for (const source of config.values()) {
+    const someApps = await getAppsForSource(octokit, source);
+    Object.assign(apps, someApps);
   }
 
   return apps;
