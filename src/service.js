@@ -1,6 +1,7 @@
 import express from 'express';
 import serveIndex from 'serve-index';
 import { Octokit } from '@octokit/rest';
+import getAppsFromGitHub from './github';
 import packageInfo from '../package';
 
 
@@ -33,34 +34,7 @@ function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-store/apps', async (req, res) => {
-    const apps = {};
-
-    config.forEach(async appSource => {
-      const directory = await octokit.rest.repos.getContent({
-        owner: appSource.owner,
-        repo: appSource.repo,
-        path: 'apps',
-      });
-
-      directory.data.forEach(async entry => {
-        const file = await octokit.rest.repos.getContent({
-          owner: appSource.owner,
-          repo: appSource.repo,
-          path: `apps/${entry.name}`,
-        });
-
-        const encoding = file.data.encoding;
-        // XXX reject non-base64
-        const content = file.data.content;
-        const cleaned = content.replace(/[\r\n]/g, '');
-        const decoded = atob(cleaned);
-        console.log('file', entry.name, `(${encoding})`, '--', decoded);
-        apps[entry.name] = decoded;
-      });
-
-      console.log('apps =', apps);
-    });
-
+    const apps = await getAppsFromGitHub(octokit, config);
     res.send(JSON.stringify(apps));
   });
 
