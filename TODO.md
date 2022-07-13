@@ -8,12 +8,12 @@
 * **DONE** -- Add logging of requests (method + url)
 * **DONE** -- Read git repo from within `mod-app-store`
 * **DONE** -- Handle GET on `/app-store-apps`, using git response
+* Handle CRUD for git repo configuration
+* Write RAML for supported web-services
+* Proper README.md
+* Automated tests
+* GitHub Actions for publishing
 * Searching and sorting
 * Response caching
 * Optional arguments to control use of cache
-* Handle CRUD for git repo configuration
-* Proper README.md
-* Write RAML for supported web-services
 * Transition to using the GitHub tracker for issues
-* Automated tests
-* GitHub Actions for publishing
