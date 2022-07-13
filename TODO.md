@@ -6,8 +6,8 @@
 * **DONE** -- Parse command-line arguments to allow e.g. `-p 3001` to change port
 * **DONE** -- Configuration of which git repos to use
 * **DONE** -- Add logging of requests (method + url)
-* Handle GET on `/app-store-apps`, using git response
-* Read git repo from within `mod-app-store`
+* **DONE** -- Read git repo from within `mod-app-store`
+* **DONE** -- Handle GET on `/app-store-apps`, using git response
 * Searching and sorting
 * Response caching
 * Optional arguments to control use of cache
