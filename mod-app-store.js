@@ -1,10 +1,36 @@
+/* eslint-disable no-console */
+
+import optParser from 'node-getopt';
 import express from 'express';
 import serveIndex from 'serve-index';
 import Logger from './src/configuredLogger';
+import packageInfo from './package';
 
 const logger = new Logger();
 const app = express();
-const port = 3002; // XXX should provide a way to change this
+let port = 3002;
+
+const argv0 = process.argv[1].replace(/.*\//, '');
+const opt = optParser.create([
+  ['p', 'port=NUMBER', `Listen on port [default: ${port}]`],
+  ['V', 'version', 'Show version and exit'],
+  ['h', 'help', 'Display this help'],
+])
+  .bindHelp()
+  .parseSystem();
+
+if (opt.options.version) {
+  console.log(`${argv0} version ${packageInfo.version}`);
+  process.exit(0);
+}
+
+if (opt.argv.length !== 0) {
+  console.info(opt.getHelp());
+  process.exit(1);
+}
+
+port = opt.options.port;
+
 
 app.get('/', (req, res) => {
   res.send(`
