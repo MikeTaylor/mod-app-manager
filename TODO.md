@@ -1,7 +1,7 @@
 # Informal register of issues for `mod-app-store`
 
 * **DONE** -- Generate descriptors from templates
-* Create a git repo containing FAM files
+* **DONE** -- Create a git repo containing FAM files ([`example-folio-app-source`](https://github.com/MikeTaylor/example-folio-app-source))
 * Read git repo from within `mod-app-store`
 * Configuration of which git repos to use
 * Handle GET on `/admin/health`, returning response code 200
