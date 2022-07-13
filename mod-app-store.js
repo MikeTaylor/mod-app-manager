@@ -32,4 +32,4 @@ const configFile = opt.argv[0];
 const config = JSON.parse(fs.readFileSync(configFile).toString());
 logger.log('config', config);
 
-serveModAddStore(logger, opt.options.port);
+serveModAddStore(logger, opt.options.port, config);
