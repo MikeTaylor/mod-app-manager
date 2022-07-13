@@ -9,5 +9,7 @@ This module supplies a simple WSAPI on which we can build a prototype
 app-store for FOLIO. Most importantly, it provides lists of candidate
 apps from a configured set of git repositories.
 
+See also: [Informal register of issues](TODO.md).
+
 Much more to come, when we figure out the details.
 
