@@ -5,6 +5,11 @@ import serveIndex from 'serve-index';
 function serveModAddStore(logger, port) {
   const app = express();
 
+  app.use(function (req, res, next) {
+    logger.log('request', req.method, req.url);
+    next();
+  });
+
   app.get('/', (req, res) => {
     res.send(`
   This is mod-app-store. Try:

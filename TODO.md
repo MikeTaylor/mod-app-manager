@@ -5,6 +5,7 @@
 * **DONE** -- Handle GET on `/admin/health`, returning response code 200
 * **DONE** -- Parse command-line arguments to allow e.g. `-p 3001` to change port
 * **DONE** -- Configuration of which git repos to use
+* **DONE** -- Add logging of requests (method + url)
 * Handle GET on `/app-store-apps`, using git response
 * Read git repo from within `mod-app-store`
 * Searching and sorting
