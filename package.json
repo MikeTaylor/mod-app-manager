@@ -11,14 +11,16 @@
   "scripts": {
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
-    "start": "babel-node --presets=env main.js -- -p 3013"
+    "start": "env LOGCAT=listen babel-node --presets=env main.js -- -p 3013"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "categorical-logger": "^1.0.0",
+    "express": "^4.18.1",
     "node-fetch": "^2.6.7",
-    "node-getopt": "^0.3.2"
+    "node-getopt": "^0.3.2",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
     "@folio/eslint-config-stripes": "^5.2.100061",

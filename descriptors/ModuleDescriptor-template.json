@@ -8,6 +8,10 @@
       "handlers" : [
         {
           "methods" : [ "GET" ],
+          "pathPattern" : "/admin/health"
+        },
+        {
+          "methods" : [ "GET" ],
           "pathPattern" : "/app-store/apps",
           "permissionsRequired": ["app-store.apps.collection.get"]
         }
