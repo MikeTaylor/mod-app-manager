@@ -2,13 +2,11 @@
 
 import fs from 'fs';
 import optParser from 'node-getopt';
-import express from 'express';
-import serveIndex from 'serve-index';
 import Logger from './src/configuredLogger';
+import serveModAddStore from './src/service';
 import packageInfo from './package';
 
 const logger = new Logger();
-const app = express();
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = optParser.create([
@@ -30,29 +28,8 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
-const port = opt.options.port;
 const configFile = opt.argv[0];
 const config = JSON.parse(fs.readFileSync(configFile).toString());
 logger.log('config', config);
 
-
-app.get('/', (req, res) => {
-  res.send(`
-This is mod-app-store. Try:
-<ul>
-  <li><a href="/admin/health">Health check</a></li>
-  <li><a href="/target/">Generated descriptors</a></li>
-</ul>
-`);
-});
-
-app.get('/admin/health', (req, res) => {
-  res.send('Behold! I live!!');
-});
-
-// Allow module descriptors to be accessed via HTTP, just because we can
-app.use('/target', express.static('target'), serveIndex('target', { view: 'details' }));
-
-app.listen(port, () => {
-  logger.log('listen', `mod-app-store listening on port ${port}`);
-});
+serveModAddStore(logger, opt.options.port);
