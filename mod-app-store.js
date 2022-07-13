@@ -8,11 +8,10 @@ import packageInfo from './package';
 
 const logger = new Logger();
 const app = express();
-let port = 3002;
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = optParser.create([
-  ['p', 'port=NUMBER', `Listen on port [default: ${port}]`],
+  ['p', 'port=NUMBER', 'Listen on port', 3002],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
 ])
@@ -29,7 +28,7 @@ if (opt.argv.length !== 0) {
   process.exit(1);
 }
 
-port = opt.options.port;
+const port = opt.options.port;
 
 
 app.get('/', (req, res) => {
