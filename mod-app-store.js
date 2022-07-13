@@ -1,5 +1,5 @@
 import express from 'express';
-var serveIndex = require('serve-index')
+import serveIndex from 'serve-index';
 import Logger from './src/configuredLogger';
 
 const logger = new Logger();

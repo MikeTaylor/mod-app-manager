@@ -6,12 +6,12 @@
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
-  "main": "main.js",
+  "main": "mod-app-store.js",
   "license": "Apache-2.0",
   "scripts": {
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
-    "start": "env LOGCAT=listen babel-node --presets=env main.js -- -p 3013"
+    "start": "env LOGCAT=listen babel-node --presets=env mod-app-store.js -- -p 3013"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
