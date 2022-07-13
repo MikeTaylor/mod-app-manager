@@ -1,8 +1,16 @@
 import express from 'express';
 import serveIndex from 'serve-index';
+import { Octokit } from '@octokit/rest';
+import getAppsFromGitHub from './github';
+import packageInfo from '../package';
 
 
 function serveModAddStore(logger, port, config) {
+  const octokit = new Octokit({
+    auth: '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', // XXX pass on commmand-line
+    userAgent: `FOLIO mod-app-store v${packageInfo.version}`,
+  });
+
   const app = express();
 
   app.use((req, res, next) => {
@@ -25,8 +33,9 @@ function serveModAddStore(logger, port, config) {
     res.send('Behold! I live!!');
   });
 
-  app.get('/app-store/apps', (req, res) => {
-    res.send(JSON.stringify(config));
+  app.get('/app-store/apps', async (req, res) => {
+    const apps = await getAppsFromGitHub(octokit, config);
+    res.send(JSON.stringify(apps));
   });
 
   // Allow module descriptors to be accessed via HTTP, just because we can
