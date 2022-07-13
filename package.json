@@ -11,7 +11,7 @@
   "scripts": {
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
-    "start": "env LOGCAT=listen babel-node --presets=env -- mod-app-store.js -p 3013"
+    "start": "env LOGCAT=config,listen babel-node --presets=env -- mod-app-store.js etc/git-repo-config.json"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

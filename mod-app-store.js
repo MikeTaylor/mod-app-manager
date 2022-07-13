@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+import fs from 'fs';
 import optParser from 'node-getopt';
 import express from 'express';
 import serveIndex from 'serve-index';
@@ -15,6 +16,7 @@ const opt = optParser.create([
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
 ])
+  .setHelp(`Usage:\n  ${argv0} [OPTIONS] <configFile>\n\nOptions:\n[[OPTIONS]]\n`)
   .bindHelp()
   .parseSystem();
 
@@ -23,12 +25,15 @@ if (opt.options.version) {
   process.exit(0);
 }
 
-if (opt.argv.length !== 0) {
+if (opt.argv.length !== 1) {
   console.info(opt.getHelp());
   process.exit(1);
 }
 
 const port = opt.options.port;
+const configFile = opt.argv[0];
+const config = JSON.parse(fs.readFileSync(configFile).toString());
+logger.log('config', config);
 
 
 app.get('/', (req, res) => {
