@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script expects to be run in the project's root directory
+test -f ModuleDescriptor-template.json && cd ..
+
+test -d target || mkdir target
+for i in Activate DeploymentDescriptor Discovery ModuleDescriptor; do
+        descriptors/transform-descriptor.js descriptors/$i-template.json > target/$i.json
+done

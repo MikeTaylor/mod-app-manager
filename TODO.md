@@ -1,6 +1,6 @@
 # Informal register of issues for `mod-app-store`
 
-* Generate descriptors from templates
+* **DONE** -- Generate descriptors from templates
 * Create a git repo containing FAM files
 * Read git repo from within `mod-app-store`
 * Configuration of which git repos to use

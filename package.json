@@ -9,6 +9,7 @@
   "main": "main.js",
   "license": "Apache-2.0",
   "scripts": {
+    "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
     "start": "babel-node --presets=env main.js -- -p 3013"
   },
