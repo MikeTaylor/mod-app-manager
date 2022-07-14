@@ -34,8 +34,13 @@ function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-store/apps', async (req, res) => {
-    const apps = await getAppsFromGitHub(octokit, config);
-    res.send(JSON.stringify(apps));
+    try {
+      const apps = await getAppsFromGitHub(octokit, config);
+      res.send(JSON.stringify(apps));
+    } catch (e) {
+      res.status(500);
+      res.send(e);
+    }
   });
 
   // Allow module descriptors to be accessed via HTTP, just because we can
