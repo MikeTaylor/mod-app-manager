@@ -4,6 +4,15 @@ Copyright (C) 2022 Index Data Aps.
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
+<!-- md2toc -l 2 README.md -->
+* [Overview](#overview)
+* [Invocation](#invocation)
+* [Environment](#environment)
+* [Configuration](#configuration)
+* [Descriptors](#descriptors)
+* [See also](#see-also)
+
+
 ## Overview
 
 This module supplies a simple WSAPI on which we can build a prototype app-store for FOLIO. Most importantly, it provides lists of candidate apps from a configured set of GitHub repositories. In time, we will provide a WSAPI to maintain that configuration, but for now the static file is used.
@@ -28,7 +37,10 @@ The following command-line options are supported:
 
 The following logging categories are used:
 
-XXX TODO
+* `config` -- logs the compiled configuration when it's parsed during startup.
+* `listen` -- logs the listen port when the server becomes available to receive connections.
+* `request` -- logs each incoming request's method and path
+* `error` -- logs errors that are sent back in HTTP 500 responses
 
 For example, you might set the categories as follows:
 

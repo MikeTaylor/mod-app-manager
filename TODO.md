@@ -10,7 +10,7 @@
 * **DONE** -- Handle GET on `/app-store-apps`, using git response
 * **DONE** -- Report GitHub HTTP errors (such as expired token) to client
 * **DONE** -- Specify GitHub tokens in configuration file
-* Complete README.md
+* **DONE** -- Complete README.md
 * Remove heath-check from module descriptor.
 * Write RAML for supported web-services
 * Handle CRUD for git repo configuration, using mod-configuration
