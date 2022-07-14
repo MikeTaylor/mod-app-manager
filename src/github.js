@@ -22,7 +22,7 @@ async function getSingleApp(octokit, source, name) {
 
 async function getAppsForSource(source) {
   const octokit = new Octokit({
-    auth: source.tokenStart + source.tokenEnd,
+    auth: source.token || (source.tokenStart + source.tokenEnd),
     userAgent: `FOLIO mod-app-store v${packageInfo.version}`,
   });
 
