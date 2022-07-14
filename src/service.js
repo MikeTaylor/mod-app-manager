@@ -1,16 +1,9 @@
 import express from 'express';
 import serveIndex from 'serve-index';
-import { Octokit } from '@octokit/rest';
 import getAppsFromGitHub from './github';
-import packageInfo from '../package';
 
 
 function serveModAddStore(logger, port, config) {
-  const octokit = new Octokit({
-    auth: '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', // XXX pass on commmand-line
-    userAgent: `FOLIO mod-app-store v${packageInfo.version}`,
-  });
-
   const app = express();
 
   app.use((req, res, next) => {
@@ -35,11 +28,12 @@ function serveModAddStore(logger, port, config) {
 
   app.get('/app-store/apps', async (req, res) => {
     try {
-      const apps = await getAppsFromGitHub(octokit, config);
+      const apps = await getAppsFromGitHub(config);
       res.send(JSON.stringify(apps));
     } catch (e) {
+      logger.log('error', e.toString());
       res.status(500);
-      res.send(e);
+      res.send(e.toString());
     }
   });
 

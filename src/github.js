@@ -1,3 +1,7 @@
+import { Octokit } from '@octokit/rest';
+import packageInfo from '../package';
+
+
 async function getSingleApp(octokit, source, name) {
   const file = await octokit.rest.repos.getContent({
     owner: source.owner,
@@ -16,7 +20,12 @@ async function getSingleApp(octokit, source, name) {
 }
 
 
-async function getAppsForSource(octokit, source) {
+async function getAppsForSource(source) {
+  const octokit = new Octokit({
+    auth: source.tokenStart + source.tokenEnd,
+    userAgent: `FOLIO mod-app-store v${packageInfo.version}`,
+  });
+
   const apps = {};
 
   const directory = await octokit.rest.repos.getContent({
@@ -34,11 +43,11 @@ async function getAppsForSource(octokit, source) {
 }
 
 
-async function getAppsFromGitHub(octokit, config) {
+async function getAppsFromGitHub(config) {
   const apps = {};
 
   for (const source of config.values()) {
-    const someApps = await getAppsForSource(octokit, source);
+    const someApps = await getAppsForSource(source);
     Object.assign(apps, someApps);
   }
 

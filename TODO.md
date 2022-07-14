@@ -9,10 +9,10 @@
 * **DONE** -- Read git repo from within `mod-app-store`
 * **DONE** -- Handle GET on `/app-store-apps`, using git response
 * **DONE** -- Report GitHub HTTP errors (such as expired token) to client
-* Configure GitHub token on command-line
-* Handle CRUD for git repo configuration
-* Write RAML for supported web-services
+* **DONE** -- Specify GitHub tokens in configuration file
 * Proper README.md
+* Write RAML for supported web-services
+* Handle CRUD for git repo configuration
 * Automated tests
 * GitHub Actions for publishing
 * Searching and sorting
