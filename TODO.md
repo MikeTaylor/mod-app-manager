@@ -13,11 +13,9 @@
 * **DONE** -- Complete README.md
 * **DONE** -- Include response code/message in "request" logging
 * **DONE** -- Remove heath-check from module descriptor
-* Write RAML for supported web-services
-* Handle CRUD for git repo configuration, using mod-configuration
-* Automated tests
 * GitHub Actions for publishing
-* Searching and sorting
-* Response caching
-* Optional arguments to control use of cache
+* Handle CRUD for git repo configuration, using mod-configuration
+* Write RAML for supported web-services
+* Automated tests
+* Searching and sorting of apps
 * Transition to using the GitHub tracker for issues
