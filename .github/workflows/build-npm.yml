@@ -33,6 +33,8 @@ jobs:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
           always-auth: true
+      - name: Set yarn config
+        run: yarn config set @folio:registry https://repository.folio.org/repository/npm-folio/
       - name: Run yarn install
         run: yarn install --ignore-scripts
       - name: Run yarn lint
