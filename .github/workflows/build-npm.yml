@@ -1,0 +1,50 @@
+name: build-npm
+
+on:
+  workflow_dispatch:
+
+env:
+  NODEJS_VERSION: '16'
+
+jobs:
+  build-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Get version from package.json
+        id: package_version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: 'package.json'
+          prop_path: 'version'
+      - name: Gather some variables
+        run: |
+          echo "PACKAGE_VERSION=${{ steps.package_version.outputs.prop }}" >> $GITHUB_ENV
+          echo "DEFAULT_BRANCH=${{ github.event.repository.default_branch }}" >> $GITHUB_ENV
+      - name: Report some variables
+        run: |
+          echo "PACKAGE_VERSION=${{ env.PACKAGE_VERSION }}"
+          echo "github.REF=${{ github.REF }}"
+          echo "DEFAULT_BRANCH=${{ env.DEFAULT_BRANCH }}"
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          check-latest: true
+          always-auth: true
+      - name: Run yarn install
+        run: yarn install --ignore-scripts
+      - name: Run yarn lint
+        run: yarn lint
+        continue-on-error: true
+      - name: Generate FOLIO module descriptor
+        run: yarn generate
+      - name: Print FOLIO module descriptor
+        run: cat target/ModuleDescriptor.json
+      - name: Publish yarn.lock
+        uses: actions/upload-artifact@v3
+        with:
+          name: yarn.lock
+          path: yarn.lock
+          retention-days: 5
