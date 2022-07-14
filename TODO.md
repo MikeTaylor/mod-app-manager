@@ -11,6 +11,7 @@
 * **DONE** -- Report GitHub HTTP errors (such as expired token) to client
 * **DONE** -- Specify GitHub tokens in configuration file
 * **DONE** -- Complete README.md
+* **DONE** -- Include response code/message in "request" logging
 * Remove heath-check from module descriptor.
 * Write RAML for supported web-services
 * Handle CRUD for git repo configuration, using mod-configuration

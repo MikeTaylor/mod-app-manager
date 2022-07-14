@@ -7,7 +7,11 @@ function serveModAddStore(logger, port, config) {
   const app = express();
 
   app.use((req, res, next) => {
-    logger.log('request', req.method, req.url);
+    const url = req.url; // This sometimes changes by the time res.once fires
+    res.once('finish', () => {
+      logger.log('request', req.method, url, '-->', res.statusCode, res.statusMessage);
+    });
+
     next();
   });
 
