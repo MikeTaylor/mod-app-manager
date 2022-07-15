@@ -14,8 +14,10 @@
 * **DONE** -- Include response code/message in "request" logging
 * **DONE** -- Remove heath-check from module descriptor
 * **DONE** -- Support for Docker
-* GitHub Actions for publishing
+* **DONE** -- GitHub Actions for publishing
+* **DONE** -- Make new GitHub apps repo with FAM for this module, add to configuration
 * Handle CRUD for git repo configuration, using mod-configuration
+* Support `_tenant` interface for `loadReference` and `loadSample` operations
 * Write RAML for supported web-services
 * Automated tests
 * Searching and sorting of apps

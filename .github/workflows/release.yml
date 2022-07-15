@@ -86,6 +86,9 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: target/ModuleDescriptor.json
+      - name: Debug login to ModuleDescriptor registry
+        run: |
+          echo "length(secrets.FOLIO_REGISTRY_TENANT)" = `echo ${{ secrets.FOLIO_REGISTRY_TENANT }} | awk '{ print length($1) }'`
       - name: Login to ModuleDescriptor registry
         id: login-md-registry
         uses: indiesdev/curl@v1.1
