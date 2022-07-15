@@ -85,7 +85,7 @@ jobs:
         id: moduleDescriptor
         uses: juliangruber/read-file-action@v1
         with:
-          path: ${{ env.MODULE_DESCRIPTOR }}
+          path: target/ModuleDescriptor.json
       - name: Login to ModuleDescriptor registry
         id: login-md-registry
         uses: indiesdev/curl@v1.1
