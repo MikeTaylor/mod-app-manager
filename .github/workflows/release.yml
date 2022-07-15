@@ -1,4 +1,4 @@
-name: build-npm
+name: release
 
 on:
   workflow_dispatch:
