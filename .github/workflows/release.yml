@@ -86,6 +86,9 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: target/ModuleDescriptor.json
+      - name: Debug login to ModuleDescriptor registry
+        run: |
+          echo secrets.FOLIO_REGISTRY_TENANT=${{ secrets.FOLIO_REGISTRY_TENANT }}
       - name: Login to ModuleDescriptor registry
         id: login-md-registry
         uses: indiesdev/curl@v1.1
