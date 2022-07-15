@@ -79,15 +79,15 @@ Step 1/11 : FROM node:16-alpine AS base
 [...]
 Successfully built ad5ee83ded0e
 Successfully tagged mod-app-store:latest
-$ docker run -dp 3002:3002 mod-app-store
+$ docker run -dp 3002:3002 --name MAS mod-app-store
 affad42ca413579d56f9115662496eb82591995c05540e7a36dc87f09b8b987b
 e$ curl -w '\n' localhost:3002/admin/health
 Behold! I live!!
 $ docker ps
 CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-affad42ca413   mod-app-store   "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   0.0.0.0:3002->3002/tcp, :::3002->3002/tcp   peaceful_kapitsa
-$ docker stop affad42ca413
-affad42ca413
+affad42ca413   mod-app-store   "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   0.0.0.0:3002->3002/tcp, :::3002->3002/tcp   MAS
+$ docker stop MAS
+MAS
 ```
 
 
