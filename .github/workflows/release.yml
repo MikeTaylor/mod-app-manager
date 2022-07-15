@@ -8,6 +8,7 @@ on:
 
 env:
   NODEJS_VERSION: '16'
+  FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
   CONTAINER_REGISTRY: 'ghcr.io'
 
 jobs:
@@ -37,6 +38,7 @@ jobs:
           node-version: 16
           check-latest: true
           always-auth: true
+
       - name: Set yarn config
         run: yarn config set @folio:registry https://repository.folio.org/repository/npm-folio/
       - name: Run yarn install
@@ -44,13 +46,76 @@ jobs:
       - name: Run yarn lint
         run: yarn lint
         continue-on-error: true
-      - name: Generate FOLIO module descriptor
-        run: yarn generate
-      - name: Print FOLIO module descriptor
-        run: cat target/ModuleDescriptor.json
+      - name: Run tests
+        run: yarn test
       - name: Publish yarn.lock
         uses: actions/upload-artifact@v3
         with:
           name: yarn.lock
           path: yarn.lock
           retention-days: 5
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.CONTAINER_REGISTRY }}
+          username: ${{ github.ACTOR }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract docker metadata
+        id: dockerMetadata
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.CONTAINER_REGISTRY }}/MikeTaylor/mod-app-store
+          labels: |
+            org.opencontainers.image.vendor=Mike Taylor
+            org.opencontainers.image.documentation=https://github.com/MikeTaylor/mod-app-store/blob/main/README.md
+      - name: Build and publish Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.dockerMetadata.outputs.tags }}
+          labels: ${{ steps.dockerMetadata.outputs.labels }}
+
+      - name: Generate FOLIO module descriptor
+        run: yarn generate
+      - name: Print FOLIO module descriptor
+        run: cat target/ModuleDescriptor.json
+      - name: Read ModuleDescriptor
+        id: moduleDescriptor
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ${{ env.MODULE_DESCRIPTOR }}
+      - name: Login to ModuleDescriptor registry
+        id: login-md-registry
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "${{ env.FOLIO_MD_REGISTRY }}/authn/login"
+          method: "POST"
+          accept: 201
+          headers: |
+            {
+              "content-type": "application/json",
+              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}"
+            }
+          body: |
+            {
+              "username": "${{ secrets.FOLIO_REGISTRY_USERNAME }}",
+              "password": "${{ secrets.FOLIO_REGISTRY_PASSWORD }}"
+            }
+      - name: Extract authentication token for ModuleDescriptor registry session
+        run: |
+          echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
+      - name: Publish ModuleDescriptor to registry
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "${{ env.FOLIO_MD_REGISTRY }}/_/proxy/modules"
+          method: "POST"
+          accept: 201
+          headers: |
+            {
+              "content-type": "application/json",
+              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}",
+              "x-okapi-token": "${{ env.TOKEN_MD_REGISTRY }}"
+            }
+          body: ${{ steps.moduleDescriptor.outputs.content }}
