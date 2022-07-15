@@ -13,6 +13,7 @@
 * **DONE** -- Complete README.md
 * **DONE** -- Include response code/message in "request" logging
 * **DONE** -- Remove heath-check from module descriptor
+* **DONE** -- Support for Docker
 * GitHub Actions for publishing
 * Handle CRUD for git repo configuration, using mod-configuration
 * Write RAML for supported web-services

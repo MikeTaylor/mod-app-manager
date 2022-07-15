@@ -10,6 +10,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 * [Environment](#environment)
 * [Configuration](#configuration)
 * [Descriptors](#descriptors)
+* [Docker build and run](#docker-build-and-run)
 * [See also](#see-also)
 
 
@@ -66,6 +67,29 @@ The distribution includes [An example configuration file](etc/git-repo-config.js
 The descriptors needed for use in FOLIO (module descriptor, deployment descriptor, etc.) are generated from templates in [the `descriptors` directory](descriptors), and the expanded versions are placed in [the `target` directory](target) as with Java-based FOLIO modules.
 
 To generate or regenerate the descriptors, use `yarn generate`.
+
+
+## Docker build and run
+
+In summary:
+```sh
+$ docker build -t mod-app-store .
+Sending build context to Docker daemon  67.89MB
+Step 1/11 : FROM node:16-alpine AS base
+[...]
+Successfully built ad5ee83ded0e
+Successfully tagged mod-app-store:latest
+$ docker run -dp 3002:3002 mod-app-store
+affad42ca413579d56f9115662496eb82591995c05540e7a36dc87f09b8b987b
+e$ curl -w '\n' localhost:3002/admin/health
+Behold! I live!!
+$ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+affad42ca413   mod-app-store   "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   0.0.0.0:3002->3002/tcp, :::3002->3002/tcp   peaceful_kapitsa
+$ docker stop affad42ca413
+affad42ca413
+```
+
 
 ## See also
 
