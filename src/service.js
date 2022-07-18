@@ -4,6 +4,18 @@ import getAppsFromGitHub from './github';
 
 
 function serveModAddStore(logger, port, config) {
+  const returnOrReport = async (res, closure) => {
+    try {
+      const value = await closure();
+      res.send(JSON.stringify(value));
+    } catch (e) {
+      logger.log('error', e.toString());
+      res.status(500);
+      res.send(e.toString());
+    }
+  };
+
+
   const app = express();
 
   app.use((req, res, next) => {
@@ -31,14 +43,7 @@ function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-store/apps', async (req, res) => {
-    try {
-      const apps = await getAppsFromGitHub(config);
-      res.send(JSON.stringify(apps));
-    } catch (e) {
-      logger.log('error', e.toString());
-      res.status(500);
-      res.send(e.toString());
-    }
+    returnOrReport(res, () => getAppsFromGitHub(config));
   });
 
   // Allow module descriptors to be accessed via HTTP, just because we can
