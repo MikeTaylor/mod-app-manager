@@ -2,6 +2,7 @@
 
 import fetch from 'node-fetch';
 import queryString from 'query-string';
+import { v4 as uuidv4 } from 'uuid';
 
 
 class CrudToConfig {
@@ -46,7 +47,7 @@ class CrudToConfig {
 
   async list() {
     let cql = `module="${this.module}"`;
-    if (this.user) cql = cql + `and user="${this.user}"`;
+    if (this.user) cql += `and user="${this.user}"`;
     const search = queryString.stringify({ limit: 1000, query: cql });
     const response = await this.okapiFetch(`configurations/entries?${search}`);
     const json = await response.json();
@@ -56,8 +57,23 @@ class CrudToConfig {
   }
 
   async add(record) {
-    console.log('adding record', record);
-    return 'id-of-new-record';
+    const uuid = uuidv4();
+    const body = {
+      configName: `${this.prefix}${uuid}`,
+      module: this.module,
+      value: record,
+    };
+    if (this.user) body.userId = this.user;
+
+    const response = await this.okapiFetch('configurations/entries', {
+      method: 'POST',
+      // XXX we do not handle user
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
+
+    // XXX we should process this a bit, instead of just blindly passing it on
+    return json;
   }
 
   async update(id, record) {
