@@ -51,7 +51,13 @@ class CrudToConfig {
     const json = await response.json();
 
     // XXX we should process this a bit, instead of just blindly passing it on
-    return json;
+    return json.configs.map(entry => {
+      const values = JSON.parse(entry.value);
+      return {
+        id: entry.id,
+        ...values,
+      };
+    });
   }
 
   async add(record) {
