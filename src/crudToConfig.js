@@ -45,9 +45,9 @@ class CrudToConfig {
   }
 
   async list() {
-    const cql = `module="${this.module}" and user="${this.user}"`;
+    let cql = `module="${this.module}"`;
+    if (this.user) cql = cql + `and user="${this.user}"`;
     const search = queryString.stringify({ limit: 1000, query: cql });
-    console.log('search =', search);
     const response = await this.okapiFetch(`configurations/entries?${search}`);
     const json = await response.json();
 
