@@ -7,7 +7,7 @@
 * **DONE** -- Configuration of which git repos to use
 * **DONE** -- Add logging of requests (method + url)
 * **DONE** -- Read git repo from within `mod-app-store`
-* **DONE** -- Handle GET on `/app-store-apps`, using git response
+* **DONE** -- Handle GET on `/app-store/apps`, using git response
 * **DONE** -- Report GitHub HTTP errors (such as expired token) to client
 * **DONE** -- Specify GitHub tokens in configuration file
 * **DONE** -- Complete README.md
@@ -16,7 +16,8 @@
 * **DONE** -- Support for Docker
 * **DONE** -- GitHub Actions for publishing
 * **DONE** -- Make new GitHub apps repo with FAM for this module, add to configuration
-* Handle CRUD for git repo configuration, using mod-configuration
+* **DONE** -- Handle CRUD for git repo configuration, using mod-configuration
+* Drive `/app-store/apps` from mod-configuration instead of hardwired config
 * Add permissions for config CRUD, including permissions for mod-configuration
 * Support `_tenant` interface for `loadReference` and `loadSample` operations
 * Write RAML for supported web-services
