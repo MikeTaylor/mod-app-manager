@@ -12,12 +12,13 @@
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
     "test": "echo No tests defined yet",
-    "start": "env LOGCAT=listen,request,error babel-node --presets=env -- mod-app-store.js etc/example-config.json"
+    "start": "env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-store.js etc/example-config.json"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.3",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.20.0",
     "categorical-logger": "^1.0.0",
     "express": "^4.18.1",
