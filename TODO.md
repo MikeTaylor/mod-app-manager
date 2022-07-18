@@ -17,6 +17,7 @@
 * **DONE** -- GitHub Actions for publishing
 * **DONE** -- Make new GitHub apps repo with FAM for this module, add to configuration
 * Handle CRUD for git repo configuration, using mod-configuration
+* Add permissions for config CRUD, including permissions for mod-configuration
 * Support `_tenant` interface for `loadReference` and `loadSample` operations
 * Write RAML for supported web-services
 * Automated tests
