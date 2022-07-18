@@ -67,7 +67,6 @@ class CrudToConfig {
 
     const response = await this.okapiFetch('configurations/entries', {
       method: 'POST',
-      // XXX we do not handle user
       body: JSON.stringify(body),
     });
     const json = await response.json();
@@ -77,16 +76,26 @@ class CrudToConfig {
   }
 
   async update(id, record) {
-    console.log('updating record', id, 'to', record);
-    // XXX to do
-    return undefined;
+    const uuid = uuidv4(); // It's fine if this changes, we don't use the configName
+    const body = {
+      configName: `${this.prefix}${uuid}`,
+      module: this.module,
+      value: record,
+    };
+    if (this.user) body.userId = this.user;
+
+    await this.okapiFetch(`configurations/entries/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    });
+    // if there was no exception, then we're good to go
   }
 
   async delete(id) {
-    const response = await this.okapiFetch(`configurations/entries/${id}`, {
+    await this.okapiFetch(`configurations/entries/${id}`, {
       method: 'DELETE',
     });
-    // if there was no exceptions, then we're good to go
+    // if there was no exception, then we're good to go
   }
 }
 
