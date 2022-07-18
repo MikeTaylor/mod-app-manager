@@ -6,10 +6,10 @@ import CrudToConfig from './crudToConfig';
 
 
 async function serveModAddStore(logger, port, config) {
-  const returnOrReport = async (res, closure) => {
+  const returnOrReport = async (res, closure, doNotEncode) => {
     try {
       const value = await closure();
-      res.send(JSON.stringify(value));
+      res.send(doNotEncode ? value : JSON.stringify(value));
     } catch (e) {
       logger.log('error', e.toString());
       res.status(500);
@@ -60,7 +60,7 @@ async function serveModAddStore(logger, port, config) {
 
   app.post('/app-store/config/sources', async (req, res) => {
     const record = req.body;
-    returnOrReport(res, () => c2c.add(record));
+    returnOrReport(res, () => c2c.add(record), true);
   });
 
   app.put('/app-store/config/sources/:id', async (req, res) => {

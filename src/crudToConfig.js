@@ -68,9 +68,7 @@ class CrudToConfig {
       body: JSON.stringify(body),
     });
     const json = await response.json();
-
-    // XXX we should process this a bit, instead of just blindly passing it on
-    return json;
+    return json.id;
   }
 
   async update(id, record) {
