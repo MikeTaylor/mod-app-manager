@@ -23,7 +23,7 @@ This module supplies a simple WSAPI on which we can build a prototype app-store 
 
 `mod-app-store` is invoked using `babel-node` to interpret ES6 features in JavaScript. The only command-line argument is the name of a configuration file: see below. Use something like:
 
-	babel-node --presets=env -- mod-app-store.js etc/git-repo-config.json
+	babel-node --presets=env -- mod-app-store.js etc/example-config.json
 
 The following command-line options are supported:
 
@@ -59,7 +59,7 @@ The file must be well-formed JSON consisting of a single array. Each entry in th
 * `token` -- [A GitHub personal token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) which can be used to access the repository via the GitHub API.
 * `tokenStart` and `tokenEnd` -- If `token` is not provided, then the values of these two fields are concatenated and used as the token. This can be necessary when maintaining a configuration in git, as GitHub automatically revokes any token that it sees in files that are pushed to it.
 
-The distribution includes [An example configuration file](etc/git-repo-config.json).
+The distribution includes [An example configuration file](etc/example-config.json).
 
 
 ## Descriptors
