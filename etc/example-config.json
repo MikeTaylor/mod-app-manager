@@ -1,5 +1,8 @@
 {
-  "folioCredentials": {
+  "folioInfo": {
+    "COMMENT": "all of these should be ignored when invoked from a request with its own session",
+    "url": "https://folio-snapshot-okapi.dev.folio.org",
+    "tenant": "diku",
     "username": "diku_admin",
     "password": "admin"
   },
