@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import fetch from 'node-fetch';
 import queryString from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
