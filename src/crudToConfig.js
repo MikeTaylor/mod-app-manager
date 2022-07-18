@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 class CrudToConfig {
   constructor(module, user, prefix) {
     this.module = module;
