@@ -1,12 +1,35 @@
 /* eslint-disable no-console */
 
+import fetch from 'node-fetch';
+
+
 class CrudToConfig {
   constructor(module, user, prefix) {
     this.module = module;
     this.user = user;
     this.prefix = prefix;
+  }
 
-    console.log(`made new CrudToConfig with module=${module}, user=${user}, prefix=${prefix}`);
+  async login(folioInfo) {
+    const url = folioInfo.url + '/authn/login';
+    const credentials = { username: folioInfo.username, password: folioInfo.password };
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: {
+        'Content-type': 'application/json',
+        'X-Okapi-Tenant': folioInfo.tenant,
+      }
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw Error(`Fetch error: ${response.statusText}: ${text}`);
+    }
+
+    const json = await response.json();
+    this.token = json.okapiToken;
   }
 
   async list() {

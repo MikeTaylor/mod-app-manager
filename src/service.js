@@ -5,7 +5,7 @@ import getAppsFromGitHub from './github';
 import CrudToConfig from './crudToConfig';
 
 
-function serveModAddStore(logger, port, config) {
+async function serveModAddStore(logger, port, config) {
   const returnOrReport = async (res, closure) => {
     try {
       const value = await closure();
@@ -19,6 +19,8 @@ function serveModAddStore(logger, port, config) {
 
 
   const c2c = new CrudToConfig('APPSTORE', undefined, 'source-');
+  await c2c.login(config.folioInfo);
+
   const app = express();
   app.use(bodyParser.text({ type: () => true }));
 
