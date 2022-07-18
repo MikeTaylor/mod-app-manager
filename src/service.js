@@ -1,6 +1,7 @@
 import express from 'express';
 import serveIndex from 'serve-index';
 import getAppsFromGitHub from './github';
+import CrudToConfig from './crudToConfig';
 
 
 function serveModAddStore(logger, port, config) {
@@ -16,6 +17,7 @@ function serveModAddStore(logger, port, config) {
   };
 
 
+  const c2c = new CrudToConfig('APPSTORE', undefined, 'source-');
   const app = express();
 
   app.use((req, res, next) => {
@@ -32,6 +34,7 @@ function serveModAddStore(logger, port, config) {
   This is mod-app-store. Try:
   <ul>
     <li><a href="/admin/health">Health check</a></li>
+    <li><a href="/app-store/config/sources">Configure sources</a></li>
     <li><a href="/app-store/apps">Apps</a></li>
     <li><a href="/target/">Generated descriptors</a></li>
   </ul>
@@ -44,6 +47,26 @@ function serveModAddStore(logger, port, config) {
 
   app.get('/app-store/apps', async (req, res) => {
     returnOrReport(res, () => getAppsFromGitHub(config));
+  });
+
+  app.get('/app-store/config/sources', async (req, res) => {
+    returnOrReport(res, () => c2c.list());
+  });
+
+  app.post('/app-store/config/sources', async (req, res) => {
+    const record = 'XXX';
+    returnOrReport(res, () => c2c.add(record));
+  });
+
+  app.put('/app-store/config/sources/id', async (req, res) => {
+    const id = 'XXX';
+    const record = 'XXX';
+    returnOrReport(res, () => c2c.update(id, record));
+  });
+
+  app.delete('/app-store/config/sources/id', async (req, res) => {
+    const id = 'XXX';
+    returnOrReport(res, () => c2c.delete(id));
   });
 
   // Allow module descriptors to be accessed via HTTP, just because we can
