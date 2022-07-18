@@ -10,17 +10,26 @@ class CrudToConfig {
     this.prefix = prefix;
   }
 
-  async login(folioInfo) {
-    const url = folioInfo.url + '/authn/login';
-    const credentials = { username: folioInfo.username, password: folioInfo.password };
+  async okapiFetch(path, options) {
+    return fetch(this.url + '/' + path, {
+      ...options,
+      headers: {
+        ...options.headers,
+        'Content-type': 'application/json',
+        'X-Okapi-Tenant': this.tenant,
+        'X-Okapi-Token': this.token || ''
+      }
+    });
+  }
 
-    const response = await fetch(url, {
+  async login(folioInfo) {
+    this.url = folioInfo.url;
+    this.tenant = folioInfo.tenant;
+
+    const credentials = { username: folioInfo.username, password: folioInfo.password };
+    const response = await this.okapiFetch('authn/login', {
       method: 'POST',
       body: JSON.stringify(credentials),
-      headers: {
-        'Content-type': 'application/json',
-        'X-Okapi-Tenant': folioInfo.tenant,
-      }
     });
 
     if (!response.ok) {
