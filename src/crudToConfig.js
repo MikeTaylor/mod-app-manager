@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import fetch from 'node-fetch';
+import queryString from 'query-string';
 
 
 class CrudToConfig {
@@ -11,15 +12,22 @@ class CrudToConfig {
   }
 
   async okapiFetch(path, options) {
-    return fetch(this.url + '/' + path, {
+    const response = await fetch(this.url + '/' + path, {
       ...options,
       headers: {
-        ...options.headers,
+        ...(options && options.headers),
         'Content-type': 'application/json',
         'X-Okapi-Tenant': this.tenant,
         'X-Okapi-Token': this.token || ''
       }
     });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw Error(`Fetch error: ${response.statusText}: ${text}`);
+    }
+
+    return response;
   }
 
   async login(folioInfo) {
@@ -32,23 +40,19 @@ class CrudToConfig {
       body: JSON.stringify(credentials),
     });
 
-    if (!response.ok) {
-      const text = await response.text();
-      throw Error(`Fetch error: ${response.statusText}: ${text}`);
-    }
-
     const json = await response.json();
     this.token = json.okapiToken;
   }
 
   async list() {
-    return [
-      {
-        owner: 'fiona',
-        repo: 'whatever',
-        token: '123abc',
-      }
-    ];
+    const cql = `module="${this.module}" and user="${this.user}"`;
+    const search = queryString.stringify({ limit: 1000, query: cql });
+    console.log('search =', search);
+    const response = await this.okapiFetch(`configurations/entries?${search}`);
+    const json = await response.json();
+
+    // XXX we should process this a bit, instead of just blindly passing it on
+    return json;
   }
 
   async add(record) {
