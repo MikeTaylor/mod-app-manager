@@ -1,5 +1,6 @@
 import express from 'express';
 import serveIndex from 'serve-index';
+import bodyParser from 'body-parser';
 import getAppsFromGitHub from './github';
 import CrudToConfig from './crudToConfig';
 
@@ -19,6 +20,7 @@ function serveModAddStore(logger, port, config) {
 
   const c2c = new CrudToConfig('APPSTORE', undefined, 'source-');
   const app = express();
+  app.use(bodyParser.text({ type: () => true }));
 
   app.use((req, res, next) => {
     const url = req.url; // This sometimes changes by the time res.once fires
@@ -36,6 +38,7 @@ function serveModAddStore(logger, port, config) {
     <li><a href="/admin/health">Health check</a></li>
     <li><a href="/app-store/config/sources">Configure sources</a></li>
     <li><a href="/app-store/apps">Apps</a></li>
+    <li><a href="/htdocs/">Static area</a></li>
     <li><a href="/target/">Generated descriptors</a></li>
   </ul>
   `);
@@ -68,6 +71,8 @@ function serveModAddStore(logger, port, config) {
     const id = req.params.id;
     returnOrReport(res, () => c2c.delete(id));
   });
+
+  app.use('/htdocs', express.static('etc/htdocs'), serveIndex('etc/htdocs', { view: 'details' }));
 
   // Allow module descriptors to be accessed via HTTP, just because we can
   app.use('/target', express.static('target'), serveIndex('target', { view: 'details' }));
