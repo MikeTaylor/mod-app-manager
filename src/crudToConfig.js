@@ -78,12 +78,15 @@ class CrudToConfig {
 
   async update(id, record) {
     console.log('updating record', id, 'to', record);
+    // XXX to do
     return undefined;
   }
 
   async delete(id) {
-    console.log('deleting record', id);
-    return undefined;
+    const response = await this.okapiFetch(`configurations/entries/${id}`, {
+      method: 'DELETE',
+    });
+    // if there was no exceptions, then we're good to go
   }
 }
 
