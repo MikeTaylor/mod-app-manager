@@ -49,7 +49,7 @@ function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-store/apps', async (req, res) => {
-    returnOrReport(res, () => getAppsFromGitHub(config));
+    returnOrReport(res, () => getAppsFromGitHub(config.sources));
   });
 
   app.get('/app-store/config/sources', async (req, res) => {

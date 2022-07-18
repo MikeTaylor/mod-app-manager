@@ -1,14 +1,20 @@
-[
-  {
-    "owner": "MikeTaylor",
-    "repo": "example-folio-app-source",
-    "tokenStart": "ghp_sDQ50nUFmPeiPdRj",
-    "tokenEnd": "VHfCg7uxWbgioQ0SzBZQ"
+{
+  "folioCredentials": {
+    "username": "diku_admin",
+    "password": "admin"
   },
-  {
-    "owner": "MikeTaylor",
-    "repo": "another-folio-app-source",
-    "tokenStart": "ghp_sDQ50nUFmPeiPdRjVHfCg7uxWbgioQ0SzBZ",
-    "tokenEnd": "Q"
-  }
-]
+  "sources": [
+    {
+      "owner": "MikeTaylor",
+      "repo": "example-folio-app-source",
+      "tokenStart": "ghp_sDQ50nUFmPeiPdRj",
+      "tokenEnd": "VHfCg7uxWbgioQ0SzBZQ"
+    },
+    {
+      "owner": "MikeTaylor",
+      "repo": "another-folio-app-source",
+      "tokenStart": "ghp_sDQ50nUFmPeiPdRjVHfCg7uxWbgioQ0SzBZ",
+      "tokenEnd": "Q"
+    }
+  ]
+}
