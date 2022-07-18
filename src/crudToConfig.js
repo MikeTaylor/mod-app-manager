@@ -18,14 +18,17 @@ class CrudToConfig {
   }
 
   async add(record) {
+    console.log('adding record', record);
     return 'id-of-new-record';
   }
 
   async update(id, record) {
+    console.log('updating record', id, 'to', record);
     return undefined;
   }
 
   async delete(id) {
+    console.log('deleting record', id);
     return undefined;
   }
 }

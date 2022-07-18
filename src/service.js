@@ -54,18 +54,18 @@ function serveModAddStore(logger, port, config) {
   });
 
   app.post('/app-store/config/sources', async (req, res) => {
-    const record = 'XXX';
+    const record = req.body;
     returnOrReport(res, () => c2c.add(record));
   });
 
-  app.put('/app-store/config/sources/id', async (req, res) => {
-    const id = 'XXX';
-    const record = 'XXX';
+  app.put('/app-store/config/sources/:id', async (req, res) => {
+    const id = req.params.id;
+    const record = req.body;
     returnOrReport(res, () => c2c.update(id, record));
   });
 
-  app.delete('/app-store/config/sources/id', async (req, res) => {
-    const id = 'XXX';
+  app.delete('/app-store/config/sources/:id', async (req, res) => {
+    const id = req.params.id;
     returnOrReport(res, () => c2c.delete(id));
   });
 
