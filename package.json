@@ -2,7 +2,7 @@
   "name": "@indexdata/mod-app-store",
   "version": "1.0.0",
   "description": "App-store server for FOLIO",
-  "repository": "MikeTaylor/",
+  "repository": "MikeTaylor/mod-app-store",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
