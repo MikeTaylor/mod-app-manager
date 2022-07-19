@@ -1,73 +1,73 @@
 {
   "id": "${artifactId}-${version}",
-  "name": "App-store server for FOLIO",
+  "name": "App-manager server for FOLIO",
   "provides": [
     {
-      "id": "app-store",
+      "id": "app-manager",
       "version": "1.0",
       "handlers": [
         {
           "methods": ["GET"],
-          "pathPattern": "/app-store/apps",
-          "permissionsRequired": ["app-store.apps.collection.get"]
+          "pathPattern": "/app-manager/apps",
+          "permissionsRequired": ["app-manager.apps.collection.get"]
         },
         {
           "methods": ["GET"],
-          "pathPattern": "/app-store/config/sources",
-          "permissionsRequired": ["app-store.config.sources.collection.get"]
+          "pathPattern": "/app-manager/config/sources",
+          "permissionsRequired": ["app-manager.config.sources.collection.get"]
         },
         {
           "methods": ["POST"],
-          "pathPattern": "/app-store/config/sources",
-          "permissionsRequired": ["app-store.config.sources.item.post"]
+          "pathPattern": "/app-manager/config/sources",
+          "permissionsRequired": ["app-manager.config.sources.item.post"]
         },
         {
           "methods": ["PUT"],
-          "pathPattern": "/app-store/config/sources/{id}",
-          "permissionsRequired": ["app-store.config.sources.item.put"]
+          "pathPattern": "/app-manager/config/sources/{id}",
+          "permissionsRequired": ["app-manager.config.sources.item.put"]
         },
         {
           "methods": ["DELETE"],
-          "pathPattern": "/app-store/config/sources/{id}",
-          "permissionsRequired": ["app-store.config.sources.item.delete"]
+          "pathPattern": "/app-manager/config/sources/{id}",
+          "permissionsRequired": ["app-manager.config.sources.item.delete"]
         }
       ]
     }
   ],
   "permissionSets": [
     {
-      "permissionName": "app-store.apps.collection.get",
-      "displayName": "App-store - get list of apps",
+      "permissionName": "app-manager.apps.collection.get",
+      "displayName": "app-manager - get list of apps",
       "subPermissions": ["configuration.entries.collection.get"]
     },
     {
-      "permissionName": "app-store.config.sources.collection.get",
-      "displayName": "App-store - list configured sources for apps",
+      "permissionName": "app-manager.config.sources.collection.get",
+      "displayName": "app-manager - list configured sources for apps",
       "subPermissions": ["configuration.entries.collection.get"]
     },
     {
-      "permissionName": "app-store.config.sources.item.post",
-      "displayName": "App-store - create new configured source",
+      "permissionName": "app-manager.config.sources.item.post",
+      "displayName": "app-manager - create new configured source",
       "subPermissions": ["configuration.entries.item.post"]
     },
     {
-      "permissionName": "app-store.config.sources.item.put",
-      "displayName": "App-store - update an existing configured source",
+      "permissionName": "app-manager.config.sources.item.put",
+      "displayName": "app-manager - update an existing configured source",
       "subPermissions": ["configuration.entries.item.put"]
     },
     {
-      "permissionName": "app-store.config.sources.item.delete",
-      "displayName": "App-store - delete an existing configured source",
+      "permissionName": "app-manager.config.sources.item.delete",
+      "displayName": "app-manager - delete an existing configured source",
       "subPermissions": ["configuration.entries.item.delete"]
     },
     {
-      "permissionName": "app-store.config.sources.all",
-      "displayName": "App-store - managed configured sources",
+      "permissionName": "app-manager.config.sources.all",
+      "displayName": "app-manager - managed configured sources",
       "subPermissions": [
-        "app-store.config.sources.collection.get",
-        "app-store.config.sources.item.post",
-        "app-store.config.sources.item.put",
-        "app-store.config.sources.item.delete"
+        "app-manager.config.sources.collection.get",
+        "app-manager.config.sources.item.post",
+        "app-manager.config.sources.item.put",
+        "app-manager.config.sources.item.delete"
       ]
     }
   ]

@@ -5,7 +5,7 @@
       function submitPost() {
 	var record = document.getElementById('postRecord').value;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/app-store/config/sources', true);
+        xhr.open('POST', '/app-manager/config/sources', true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         xhr.send(record);
       }
@@ -14,7 +14,7 @@
 	var id = document.getElementById('putId').value;
 	var record = document.getElementById('putRecord').value;
         var xhr = new XMLHttpRequest();
-        xhr.open('PUT', '/app-store/config/sources/' + id, true);
+        xhr.open('PUT', '/app-manager/config/sources/' + id, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         console.log('submitting PUT');
         xhr.send(record);
@@ -23,7 +23,7 @@
       function submitDelete() {
 	var id = document.getElementById('deleteId').value;
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/app-store/config/sources/' + id, true);
+        xhr.open('DELETE', '/app-manager/config/sources/' + id, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         console.log('submitting DELETE');
         xhr.send();
@@ -34,10 +34,10 @@
     <h1>Simple forms for mod-app-manager sources CRUD</h1>
 
     <h2>List sources</h2>
-    <a href="/app-store/config/sources">List</a>
+    <a href="/app-manager/config/sources">List</a>
 
     <h2>Add new source</h2>
-    <form action="/app-store/config/sources" method="POST">
+    <form action="/app-manager/config/sources" method="POST">
       Record:
       <textarea id="postRecord" rows="8" cols="60">
 {
@@ -52,7 +52,7 @@
     </form>
 
     <h2>Update source</h2>
-    <form action="/app-store/config/sources" method="POST">
+    <form action="/app-manager/config/sources" method="POST">
       ID:
       <input id="putId" value="123" size="60"/>
       <br />
@@ -70,7 +70,7 @@
     </form>
 
     <h2>Delete source</h2>
-    <form action="/app-store/config/sources" method="POST">
+    <form action="/app-manager/config/sources" method="POST">
       ID:
       <input id="deleteId" value="123" size="60" />
       <br />

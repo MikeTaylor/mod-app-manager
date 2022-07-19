@@ -16,7 +16,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 ## Overview
 
-This module supplies a simple WSAPI on which we can build a prototype app-store for FOLIO. Most importantly, it provides lists of candidate apps from a configured set of GitHub repositories. In time, we will provide a WSAPI to maintain that configuration, but for now the static file is used.
+This module supplies a simple WSAPI on which we can build a prototype Application Manager for FOLIO. Most importantly, it provides lists of candidate apps from a configured set of GitHub repositories. In time, we will provide a WSAPI to maintain that configuration, but for now the static file is used.
 
 
 ## Invocation

@@ -1,7 +1,7 @@
 {
   "name": "@indexdata/mod-app-manager",
   "version": "1.1.0",
-  "description": "App-store server for FOLIO",
+  "description": "App-manager server for FOLIO",
   "repository": "MikeTaylor/mod-app-manager",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
