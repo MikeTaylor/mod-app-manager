@@ -39,11 +39,12 @@
     <h2>Add new source</h2>
     <form action="/app-store/config/sources" method="POST">
       Record:
-      <textarea id="postRecord" rows="6" cols="40">
+      <textarea id="postRecord" rows="8" cols="60">
 {
-  "user": "jonno",
-  "repo": "foobar",
-  "token": "xyz"
+  "owner": "MikeTaylor",
+  "repo": "example-folio-app-source",
+  "tokenStart": "ghp_sDQ50nUFmPeiPdRj",
+  "tokenEnd": "VHfCg7uxWbgioQ0SzBZQ"
 }
       </textarea>
       <br />
@@ -53,14 +54,15 @@
     <h2>Update source</h2>
     <form action="/app-store/config/sources" method="POST">
       ID:
-      <input id="putId" value="123" />
+      <input id="putId" value="123" size="60"/>
       <br />
       Record:
-      <textarea id="putRecord" rows="6" cols="40">
+      <textarea id="putRecord" rows="8" cols="60">
 {
-  "user": "matthew",
-  "repo": "baz",
-  "token": "1a2b3c"
+  "owner": "MikeTaylor",
+  "repo": "another-folio-app-source",
+  "tokenStart": "ghp_sDQ50nUFmPeiPdRjVHfCg7uxWbgioQ0SzBZ",
+  "tokenEnd": "Q"
 }
       </textarea>
       <br />
@@ -70,7 +72,7 @@
     <h2>Delete source</h2>
     <form action="/app-store/config/sources" method="POST">
       ID:
-      <input id="deleteId" value="123" />
+      <input id="deleteId" value="123" size="60" />
       <br />
       <button type="button" onclick="submitDelete()">Delete</button>
     </form>
