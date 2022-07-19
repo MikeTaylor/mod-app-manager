@@ -5,11 +5,31 @@
     {
       "id": "app-store",
       "version": "1.0",
-      "handlers" : [
+      "handlers": [
         {
-          "methods" : [ "GET" ],
-          "pathPattern" : "/app-store/apps",
+          "methods": ["GET"],
+          "pathPattern": "/app-store/apps",
           "permissionsRequired": ["app-store.apps.collection.get"]
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/app-store/config/sources",
+          "permissionsRequired": ["app-store.config.sources.collection.get"]
+        },
+        {
+          "methods": ["POST"],
+          "pathPattern": "/app-store/config/sources",
+          "permissionsRequired": ["app-store.config.sources.item.post"]
+        },
+        {
+          "methods": ["PUT"],
+          "pathPattern": "/app-store/config/sources/{id}",
+          "permissionsRequired": ["app-store.config.sources.item.put"]
+        },
+        {
+          "methods": ["DELETE"],
+          "pathPattern": "/app-store/config/sources/{id}",
+          "permissionsRequired": ["app-store.config.sources.item.delete"]
         }
       ]
     }
@@ -18,7 +38,37 @@
     {
       "permissionName": "app-store.apps.collection.get",
       "displayName": "App-store - get list of apps",
-      "description": "Get apps collection"
+      "subPermissions": ["configuration.entries.collection.get"]
+    },
+    {
+      "permissionName": "app-store.config.sources.collection.get",
+      "displayName": "App-store - list configured sources for apps",
+      "subPermissions": ["configuration.entries.collection.get"]
+    },
+    {
+      "permissionName": "app-store.config.sources.item.post",
+      "displayName": "App-store - create new configured source",
+      "subPermissions": ["configuration.entries.item.post"]
+    },
+    {
+      "permissionName": "app-store.config.sources.item.put",
+      "displayName": "App-store - update an existing configured source",
+      "subPermissions": ["configuration.entries.item.put"]
+    },
+    {
+      "permissionName": "app-store.config.sources.item.delete",
+      "displayName": "App-store - delete an existing configured source",
+      "subPermissions": ["configuration.entries.item.delete"]
+    },
+    {
+      "permissionName": "app-store.config.sources.all",
+      "displayName": "App-store - managed configured sources",
+      "subPermissions": [
+        "app-store.config.sources.collection.get",
+        "app-store.config.sources.item.post",
+        "app-store.config.sources.item.put",
+        "app-store.config.sources.item.delete"
+      ]
     }
   ]
 }

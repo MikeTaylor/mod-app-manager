@@ -18,9 +18,12 @@
 * **DONE** -- Make new GitHub apps repo with FAM for this module, add to configuration
 * **DONE** -- Handle CRUD for git repo configuration, using mod-configuration
 * **DONE** -- Drive `/app-store/apps` from mod-configuration instead of hardwired config
-* Add permissions for config CRUD, including permissions for mod-configuration
+* **DONE** -- Write Okapi proxying entries for config CRUD WSAPI
+* **DONE** -- Add permissions for config CRUD, including permissions for mod-configuration
+* Run under Okapi (and add instructions for doing so)
 * Support `_tenant` interface for `loadReference` and `loadSample` operations: see https://folio-project.slack.com/archives/C210RP0T1/p1658220229855719?thread_ts=1657926630.076809&cid=C210RP0T1
-* Write RAML for supported web-services
+* Write RAML for the supported web-services
+* Consider caching GitHub sources and/or apps
 * Automated tests
 * Searching and sorting of apps
 * Transition to using the GitHub tracker for issues
