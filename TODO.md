@@ -20,7 +20,7 @@
 * **DONE** -- Drive `/app-store/apps` from mod-configuration instead of hardwired config
 * **DONE** -- Write Okapi proxying entries for config CRUD WSAPI
 * **DONE** -- Add permissions for config CRUD, including permissions for mod-configuration
-* Run under Okapi (and add instructions for doing so)
+* **DONE** -- Add instructions for runing under Okapi.
 * When requests provide Okapi details (url, tenant, token) use these instead of configured
 * Support `_tenant` interface for `loadReference` and `loadSample` operations: see https://folio-project.slack.com/archives/C210RP0T1/p1658220229855719?thread_ts=1657926630.076809&cid=C210RP0T1
 * Write RAML for the supported web-services
