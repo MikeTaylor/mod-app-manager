@@ -50,7 +50,6 @@ class CrudToConfig {
     const response = await this.okapiFetch(`configurations/entries?${search}`);
     const json = await response.json();
 
-    // XXX we should process this a bit, instead of just blindly passing it on
     return json.configs.map(entry => {
       const values = JSON.parse(entry.value);
       return {
