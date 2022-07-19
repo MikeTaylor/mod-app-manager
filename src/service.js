@@ -38,7 +38,7 @@ async function serveModAddStore(logger, port, config) {
   This is mod-app-store. Try:
   <ul>
     <li><a href="/admin/health">Health check</a></li>
-    <li><a href="/app-store/config/sources">Configure sources</a></li>
+    <li><a href="/app-store/config/sources">Configured sources</a></li>
     <li><a href="/app-store/apps">Apps</a></li>
     <li><a href="/htdocs/">Static area</a></li>
     <li><a href="/target/">Generated descriptors</a></li>
