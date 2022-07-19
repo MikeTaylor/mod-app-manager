@@ -51,7 +51,9 @@ async function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-store/apps', async (req, res) => {
-    returnOrReport(res, () => getAppsFromGitHub(config.sources));
+    const sourceConfig = await c2c.list();
+    console.log('sourceConfig =', sourceConfig);
+    returnOrReport(res, () => getAppsFromGitHub(sourceConfig));
   });
 
   app.get('/app-store/config/sources', async (req, res) => {

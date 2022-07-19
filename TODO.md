@@ -17,7 +17,7 @@
 * **DONE** -- GitHub Actions for publishing
 * **DONE** -- Make new GitHub apps repo with FAM for this module, add to configuration
 * **DONE** -- Handle CRUD for git repo configuration, using mod-configuration
-* Drive `/app-store/apps` from mod-configuration instead of hardwired config
+* **DONE** -- Drive `/app-store/apps` from mod-configuration instead of hardwired config
 * Add permissions for config CRUD, including permissions for mod-configuration
 * Support `_tenant` interface for `loadReference` and `loadSample` operations: see https://folio-project.slack.com/archives/C210RP0T1/p1658220229855719?thread_ts=1657926630.076809&cid=C210RP0T1
 * Write RAML for supported web-services
