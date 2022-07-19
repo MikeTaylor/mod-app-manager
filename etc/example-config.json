@@ -5,19 +5,5 @@
     "tenant": "diku",
     "username": "diku_admin",
     "password": "admin"
-  },
-  "sources": [
-    {
-      "owner": "MikeTaylor",
-      "repo": "example-folio-app-source",
-      "tokenStart": "ghp_sDQ50nUFmPeiPdRj",
-      "tokenEnd": "VHfCg7uxWbgioQ0SzBZQ"
-    },
-    {
-      "owner": "MikeTaylor",
-      "repo": "another-folio-app-source",
-      "tokenStart": "ghp_sDQ50nUFmPeiPdRjVHfCg7uxWbgioQ0SzBZ",
-      "tokenEnd": "Q"
-    }
-  ]
+  }
 }
