@@ -1,11 +1,12 @@
-# Change history for mod-app-store
+# Change history for mod-app-manager
 
-## [1.2.0](https://github.com/MikeTaylor/mod-app-store/tree/v1.2.0) (IN PROGRESS)
+## [1.2.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.2.0) (IN PROGRESS)
 
 * Drive `/app-store/apps` from mod-configuration instead of hardwired config
 * Write Okapi proxying entries for config CRUD WSAPI
 * Add permissions for config CRUD, including permissions for mod-configuration
 * Add instructions for runing under Okapi.
+* Rename from `mod-app-store` to `mod-app-manager`
 
 ## [1.1.0](https://github.com/MikeTaylor/mod-app-store/tree/v1.1.0) (2022-07-18)
 

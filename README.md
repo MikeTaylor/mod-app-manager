@@ -1,4 +1,4 @@
-# mod-app-store
+# mod-app-manager
 
 Copyright (C) 2022 Index Data Aps.
 
@@ -21,9 +21,9 @@ This module supplies a simple WSAPI on which we can build a prototype app-store 
 
 ## Invocation
 
-`mod-app-store` is invoked using `babel-node` to interpret ES6 features in JavaScript. The only command-line argument is the name of a configuration file: see below. Use something like:
+`mod-app-manager` is invoked using `babel-node` to interpret ES6 features in JavaScript. The only command-line argument is the name of a configuration file: see below. Use something like:
 
-	babel-node --presets=env -- mod-app-store.js etc/example-config.json
+	babel-node --presets=env -- mod-app-manager.js etc/example-config.json
 
 The following command-line options are supported:
 
@@ -34,7 +34,7 @@ The following command-line options are supported:
 
 ## Environment
 
-`mod-app-store` uses [categorical-logger](https://github.com/openlibraryenvironment/categorical-logger) for logging. It logs messages in the categories specified by a comma-separated list in the environment variable `LOGGING_CATEGORIES`, or if that is not defined `LOGCAT`.
+`mod-app-manager` uses [categorical-logger](https://github.com/openlibraryenvironment/categorical-logger) for logging. It logs messages in the categories specified by a comma-separated list in the environment variable `LOGGING_CATEGORIES`, or if that is not defined `LOGCAT`.
 
 The following logging categories are used:
 
@@ -73,19 +73,19 @@ To generate or regenerate the descriptors, use `yarn generate`.
 
 In summary:
 ```sh
-$ docker build -t mod-app-store .
+$ docker build -t mod-app-manager .
 Sending build context to Docker daemon  67.89MB
 Step 1/11 : FROM node:16-alpine AS base
 [...]
 Successfully built ad5ee83ded0e
-Successfully tagged mod-app-store:latest
-$ docker run -dp 3002:3002 --name MAS mod-app-store
+Successfully tagged mod-app-manager:latest
+$ docker run -dp 3002:3002 --name MAS mod-app-manager
 affad42ca413579d56f9115662496eb82591995c05540e7a36dc87f09b8b987b
 e$ curl -w '\n' localhost:3002/admin/health
 Behold! I live!!
 $ docker ps
 CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-affad42ca413   mod-app-store   "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   0.0.0.0:3002->3002/tcp, :::3002->3002/tcp   MAS
+affad42ca413   mod-app-manager "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   0.0.0.0:3002->3002/tcp, :::3002->3002/tcp   MAS
 $ docker stop MAS
 MAS
 ```
@@ -93,16 +93,16 @@ MAS
 
 ## To run under an Okapi-mediate FOLIO in a Vagrant box
 
-Start mod-app-store in the host box where you are developing:
+Start mod-app-manager in the host box where you are developing:
 ```
 shell1$ yarn start
 yarn run v1.22.18
-$ env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-store.js etc/example-config.json
-(listen) mod-app-store listening on port 3002
+$ env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-manager.js etc/example-config.json
+(listen) mod-app-manager listening on port 3002
 [...]
 ```
 
-Set up an ssh tunnel, so that the virtual machine can see the running mod-app-store in the host:
+Set up an ssh tunnel, so that the virtual machine can see the running mod-app-manager in the host:
 ```
 shell2$ cd vagrant
 shell2$ vagrant ssh -- -R 3002:localhost:3002

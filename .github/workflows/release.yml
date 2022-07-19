@@ -65,10 +65,10 @@ jobs:
         id: dockerMetadata
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.CONTAINER_REGISTRY }}/MikeTaylor/mod-app-store
+          images: ${{ env.CONTAINER_REGISTRY }}/MikeTaylor/mod-app-manager
           labels: |
             org.opencontainers.image.vendor=Mike Taylor
-            org.opencontainers.image.documentation=https://github.com/MikeTaylor/mod-app-store/blob/main/README.md
+            org.opencontainers.image.documentation=https://github.com/MikeTaylor/mod-app-manager/blob/main/README.md
       - name: Build and publish Docker image
         uses: docker/build-push-action@v2
         with:

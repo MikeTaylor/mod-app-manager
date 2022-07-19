@@ -35,7 +35,7 @@ async function serveModAddStore(logger, port, config) {
 
   app.get('/', (req, res) => {
     res.send(`
-  This is mod-app-store. Try:
+  This is mod-app-manager. Try:
   <ul>
     <li><a href="/admin/health">Health check</a></li>
     <li><a href="/app-store/config/sources">Configured sources</a></li>
@@ -82,7 +82,7 @@ async function serveModAddStore(logger, port, config) {
   app.use('/target', express.static('target'), serveIndex('target', { view: 'details' }));
 
   app.listen(port, () => {
-    logger.log('listen', `mod-app-store listening on port ${port}`);
+    logger.log('listen', `mod-app-manager listening on port ${port}`);
   });
 }
 

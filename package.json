@@ -1,18 +1,18 @@
 {
-  "name": "@indexdata/mod-app-store",
+  "name": "@indexdata/mod-app-manager",
   "version": "1.1.0",
   "description": "App-store server for FOLIO",
-  "repository": "MikeTaylor/mod-app-store",
+  "repository": "MikeTaylor/mod-app-manager",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
-  "main": "mod-app-store.js",
+  "main": "mod-app-manager.js",
   "license": "Apache-2.0",
   "scripts": {
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
     "test": "echo No tests defined yet",
-    "start": "env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-store.js etc/example-config.json"
+    "start": "env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-manager.js etc/example-config.json"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.3",
