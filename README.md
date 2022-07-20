@@ -91,7 +91,7 @@ MAS
 ```
 
 
-## To run under an Okapi-mediate FOLIO in a Vagrant box
+## To run under an Okapi-mediated FOLIO in a Vagrant box
 
 Start mod-app-manager in the host box where you are developing:
 ```
@@ -102,7 +102,7 @@ $ env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-ma
 [...]
 ```
 
-Set up an ssh tunnel, so that the virtual machine can see the running mod-app-manager in the host:
+In a second shell, set up an ssh tunnel, so that the virtual machine can see the running mod-app-manager in the host:
 ```
 shell2$ cd vagrant
 shell2$ vagrant ssh -- -R 3002:localhost:3002
@@ -110,11 +110,11 @@ vagrant@vagrant:~$
 [...]
 ```
 
-Tell Okapi (via the existing tunnel) about the newly available module, and how to access it via the tunnel, and to associate it with the tenant Diku:
+And in a third shell, tell Okapi (via the existing tunnel) about the newly available module, and how to access it via the tunnel, and to associate it with the tenant Diku:
 ```
-shell3$ curl -w '\n' -d @target/ModuleDescriptor.json http://localhost:9130/_/proxy/modules
-shell3$ curl -w '\n' -d @target/Discovery.json http://localhost:9130/_/discovery/modules
-shell3$ curl -w '\n' -d @target/Activate.json http://localhost:9130/_/proxy/tenants/diku/modules
+curl -w '\n' -d @target/ModuleDescriptor.json http://localhost:9130/_/proxy/modules
+curl -w '\n' -d @target/Discovery.json http://localhost:9130/_/discovery/modules
+curl -w '\n' -d @target/Activate.json http://localhost:9130/_/proxy/tenants/diku/modules
 ```
 
 ## See also
