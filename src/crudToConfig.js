@@ -4,13 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 class CrudToConfig {
-  constructor(module, user, prefix) {
+  constructor(folioInfo, module, user, prefix) {
+    this.folioInfo = folioInfo;
     this.module = module;
     this.user = user;
     this.prefix = prefix;
   }
 
-  async okapiFetch(path, options) {
+  async okapiFetch(req, path, options) {
     const response = await fetch(this.url + '/' + path, {
       ...options,
       headers: {
@@ -29,12 +30,12 @@ class CrudToConfig {
     return response;
   }
 
-  async login(folioInfo) {
-    this.url = folioInfo.url;
-    this.tenant = folioInfo.tenant;
+  async login(req) {
+    this.url = this.folioInfo.url;
+    this.tenant = this.folioInfo.tenant;
 
-    const credentials = { username: folioInfo.username, password: folioInfo.password };
-    const response = await this.okapiFetch('authn/login', {
+    const credentials = { username: this.folioInfo.username, password: this.folioInfo.password };
+    const response = await this.okapiFetch(req, 'authn/login', {
       method: 'POST',
       body: JSON.stringify(credentials),
     });
@@ -43,11 +44,12 @@ class CrudToConfig {
     this.token = json.okapiToken;
   }
 
-  async list() {
+  async list(req) {
+    await this.login(req);
     let cql = `module="${this.module}"`;
     if (this.user) cql += `and user="${this.user}"`;
     const search = queryString.stringify({ limit: 1000, query: cql });
-    const response = await this.okapiFetch(`configurations/entries?${search}`);
+    const response = await this.okapiFetch(req, `configurations/entries?${search}`);
     const json = await response.json();
 
     return json.configs.map(entry => {
@@ -59,7 +61,8 @@ class CrudToConfig {
     });
   }
 
-  async add(record) {
+  async add(req, record) {
+    await this.login(req);
     const uuid = uuidv4();
     const body = {
       configName: `${this.prefix}${uuid}`,
@@ -68,7 +71,7 @@ class CrudToConfig {
     };
     if (this.user) body.userId = this.user;
 
-    const response = await this.okapiFetch('configurations/entries', {
+    const response = await this.okapiFetch(req, 'configurations/entries', {
       method: 'POST',
       body: JSON.stringify(body),
     });
@@ -76,7 +79,8 @@ class CrudToConfig {
     return json.id;
   }
 
-  async update(id, record) {
+  async update(req, id, record) {
+    await this.login(req);
     const uuid = uuidv4(); // It's fine if this changes, we don't use the configName
     const body = {
       configName: `${this.prefix}${uuid}`,
@@ -85,15 +89,16 @@ class CrudToConfig {
     };
     if (this.user) body.userId = this.user;
 
-    await this.okapiFetch(`configurations/entries/${id}`, {
+    await this.okapiFetch(req, `configurations/entries/${id}`, {
       method: 'PUT',
       body: JSON.stringify(body),
     });
     // if there was no exception, then we're good to go
   }
 
-  async delete(id) {
-    await this.okapiFetch(`configurations/entries/${id}`, {
+  async delete(req, id) {
+    await this.login(req);
+    await this.okapiFetch(req, `configurations/entries/${id}`, {
       method: 'DELETE',
     });
     // if there was no exception, then we're good to go

@@ -18,9 +18,7 @@ async function serveModAddStore(logger, port, config) {
   };
 
 
-  const c2c = new CrudToConfig('APP_MANAGER', undefined, 'source-');
-  await c2c.login(config.folioInfo);
-
+  const c2c = new CrudToConfig(config.folioInfo, 'APP_MANAGER', undefined, 'source-');
   const app = express();
   app.use(bodyParser.text({ type: () => true }));
 
@@ -51,28 +49,28 @@ async function serveModAddStore(logger, port, config) {
   });
 
   app.get('/app-manager/apps', async (req, res) => {
-    const sourceConfig = await c2c.list();
+    const sourceConfig = await c2c.list(req);
     returnOrReport(res, () => getAppsFromGitHub(sourceConfig));
   });
 
   app.get('/app-manager/config/sources', async (req, res) => {
-    returnOrReport(res, () => c2c.list());
+    returnOrReport(res, () => c2c.list(req));
   });
 
   app.post('/app-manager/config/sources', async (req, res) => {
     const record = req.body;
-    returnOrReport(res, () => c2c.add(record), true);
+    returnOrReport(res, () => c2c.add(req, record), true);
   });
 
   app.put('/app-manager/config/sources/:id', async (req, res) => {
     const id = req.params.id;
     const record = req.body;
-    returnOrReport(res, () => c2c.update(id, record));
+    returnOrReport(res, () => c2c.update(req, id, record));
   });
 
   app.delete('/app-manager/config/sources/:id', async (req, res) => {
     const id = req.params.id;
-    returnOrReport(res, () => c2c.delete(id));
+    returnOrReport(res, () => c2c.delete(req, id));
   });
 
   app.use('/htdocs', express.static('etc/htdocs'), serveIndex('etc/htdocs', { view: 'details' }));
