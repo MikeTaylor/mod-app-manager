@@ -22,7 +22,10 @@
 * **DONE** -- Add permissions for config CRUD, including permissions for mod-configuration
 * **DONE** -- Add instructions for runing under Okapi.
 * **DONE** -- Rename to `mod-app-manager: repo, program, variable names, API paths, permissions, etc.
-* When requests provide Okapi details (url, tenant, token) use these instead of configured
+* **DONE** -- When requests provide Okapi details (url, tenant, token) use these instead of configured
+* Add `env` logging category
+* Separate configuration out into `defaultServer` and `credentials`
+* Rewrite Configuration section of the documentation, which is now badly outdated
 * Support `_tenant` interface for `loadReference` and `loadSample` operations: see https://folio-project.slack.com/archives/C210RP0T1/p1658220229855719?thread_ts=1657926630.076809&cid=C210RP0T1
 * Write RAML for the supported web-services
 * Consider caching GitHub sources and/or apps

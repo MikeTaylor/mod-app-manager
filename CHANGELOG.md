@@ -7,6 +7,7 @@
 * Add permissions for config CRUD, including permissions for mod-configuration
 * Add instructions for runing under Okapi.
 * Rename from `mod-app-store` to `mod-app-manager`
+* When requests provide Okapi details (url, tenant, token) use these instead of configured
 
 ## [1.1.0](https://github.com/MikeTaylor/mod-app-store/tree/v1.1.0) (2022-07-18)
 

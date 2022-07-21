@@ -8,9 +8,12 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 * [Overview](#overview)
 * [Invocation](#invocation)
 * [Environment](#environment)
+    * [`OKAPI_URL`](#okapi_url)
+    * [`LOGGING_CATEGORIES`/`LOGCAT`](#logging_categorieslogcat)
 * [Configuration](#configuration)
 * [Descriptors](#descriptors)
 * [Docker build and run](#docker-build-and-run)
+* [To run under an Okapi-mediated FOLIO in a Vagrant box](#to-run-under-an-okapi-mediated-folio-in-a-vagrant-box)
 * [See also](#see-also)
 
 
@@ -34,6 +37,14 @@ The following command-line options are supported:
 
 ## Environment
 
+### `OKAPI_URL`
+
+`mod-app-manager` stores this dynamic configuration of which GitHub sources to use in `mod-configuration`. Calls made to Okapi for this purpose are sent to Okapi that made the request, if any (using the `X-Okapi-URL` header of the incoming request), or the default URL specified in the static configuration otherwise (i.e. when used in standalone mode, not mediated by Okapi). However, if the `OKAPI_URL` environment variable is set, then this is used instead, overriding both other sources of this information.
+
+(Why is this useful? Consider a development setup when you are side-loading `mod-app-manager` by running it in a host system, with an SSH tunnel through to a FOLIO server running in a guest machine. When requests come from that server's Okapi, the service URL as known to that Okapi is one that's private to the guest OS, such as `http://10.0.2.15:9130`, so `mod-app-manager` in the host machine can't reach it. The `OKAPI_URL` provides a way to specify an address that works from the host machine, such as `http://localhost:9130` which is typically tunnelled into the guest VM.)
+
+### `LOGGING_CATEGORIES`/`LOGCAT`
+
 `mod-app-manager` uses [categorical-logger](https://github.com/openlibraryenvironment/categorical-logger) for logging. It logs messages in the categories specified by a comma-separated list in the environment variable `LOGGING_CATEGORIES`, or if that is not defined `LOGCAT`.
 
 The following logging categories are used:
@@ -49,6 +60,8 @@ For example, you might set the categories as follows:
 
 
 ## Configuration
+
+**XXX this whole section is outdated and needs rewriting**
 
 The single configuration file named on the command line specifies which GitHub repositiories should be uses as sources of apps. By configuring this, system administrators can tailor which sets of apps are made available to their users. It can be thought of as analogous to the APT source list in Debian-based Linux distributions (`/etc/apt/sources.list`).
 

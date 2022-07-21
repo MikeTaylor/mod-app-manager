@@ -9,16 +9,24 @@ class CrudToConfig {
     this.module = module;
     this.user = user;
     this.prefix = prefix;
+    this.key2token = {};
   }
 
+  folioUrl(req) { return req.get('x-okapi-url') || this.folioInfo.url; }
+  folioTenant(req) { return req.get('x-okapi-tenant') || this.folioInfo.tenant; }
+  requestKey(req) { return `${this.folioUrl(req)}*${this.folioTenant(req)}`; }
+
   async okapiFetch(req, path, options) {
-    const response = await fetch(this.url + '/' + path, {
+    const token = this.key2token[this.requestKey(req)];
+    const url = process.env.OKAPI_URL || this.folioUrl(req);
+
+    const response = await fetch(url + '/' + path, {
       ...options,
       headers: {
         ...(options && options.headers),
         'Content-type': 'application/json',
-        'X-Okapi-Tenant': this.tenant,
-        'X-Okapi-Token': this.token || ''
+        'X-Okapi-Tenant': this.folioTenant(req),
+        'X-Okapi-Token': token || '',
       }
     });
 
@@ -31,8 +39,16 @@ class CrudToConfig {
   }
 
   async login(req) {
-    this.url = this.folioInfo.url;
-    this.tenant = this.folioInfo.tenant;
+    const key = this.requestKey(req);
+    const token = req.get('x-okapi-token');
+    if (token) {
+      // Even if we already have a token from earlier, there will be a
+      // new one if the user has logged in again. So we overwrite our
+      // old token in case the new session has different permissions
+      // or has otherwise changed.
+      this.key2token[key] = token;
+      return;
+    }
 
     const credentials = { username: this.folioInfo.username, password: this.folioInfo.password };
     const response = await this.okapiFetch(req, 'authn/login', {
@@ -41,7 +57,8 @@ class CrudToConfig {
     });
 
     const json = await response.json();
-    this.token = json.okapiToken;
+    this.key2token[key] = json.okapiToken;
+    // XXX Does it suffice to stash this, or is there a race-condition?
   }
 
   async list(req) {
