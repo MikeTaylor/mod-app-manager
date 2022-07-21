@@ -1,7 +1,7 @@
 {
   "folioInfo": {
-    "COMMENT": "all of these should be ignored when invoked from a request with its own session",
-    "url": "https://folio-snapshot-okapi.dev.folio.org",
+    "COMMENT": "url and tenant are ignored when invoked from a request with its own session",
+    "url": "http://localhost:9130",
     "tenant": "diku",
     "username": "diku_admin",
     "password": "admin"
