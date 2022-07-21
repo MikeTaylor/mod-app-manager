@@ -45,7 +45,7 @@ The following command-line options are supported:
 
 ### `LOGGING_CATEGORIES`/`LOGCAT`
 
-`mod-app-manager` uses [categorical-logger](https://github.com/openlibraryenvironment/categorical-logger) for logging. It logs messages in the categories specified by a comma-separated list in the environment variable `LOGGING_CATEGORIES`, or if that is not defined `LOGCAT`.
+`mod-app-manager` uses [`categorical-logger`](https://github.com/openlibraryenvironment/categorical-logger) for logging. It logs messages in the categories specified by a comma-separated list in the environment variable `LOGGING_CATEGORIES`, or if that is not defined `LOGCAT`.
 
 The following logging categories are used:
 
@@ -106,7 +106,7 @@ MAS
 
 ## To run under an Okapi-mediated FOLIO in a Vagrant box
 
-Start mod-app-manager in the host box where you are developing:
+Start `mod-app-manager` in the host box where you are developing:
 ```
 shell1$ yarn start
 yarn run v1.22.18
@@ -115,7 +115,7 @@ $ env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-ma
 [...]
 ```
 
-In a second shell, set up an ssh tunnel, so that the virtual machine can see the running mod-app-manager in the host:
+In a second shell, set up an ssh tunnel, so that the virtual machine can see the running `mod-app-manager` in the host:
 ```
 shell2$ cd vagrant
 shell2$ vagrant ssh -- -R 3002:localhost:3002
