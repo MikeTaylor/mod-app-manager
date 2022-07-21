@@ -11,7 +11,7 @@ async function serveModAddStore(logger, port, config) {
       const value = await closure();
       res.send(doNotEncode ? value : JSON.stringify(value));
     } catch (e) {
-      logger.log('error', e.toString());
+      logger.log('error', e);
       res.status(500);
       res.send(e.toString());
     }
