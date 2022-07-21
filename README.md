@@ -50,6 +50,7 @@ The following command-line options are supported:
 The following logging categories are used:
 
 * `config` -- logs the compiled configuration when it's parsed during startup.
+* `env` -- logs relevant environment variables if they are set.
 * `listen` -- logs the listen port when the server becomes available to receive connections.
 * `request` -- logs each incoming request's method and path, and the response code and message
 * `error` -- logs errors that are sent back in HTTP 500 responses

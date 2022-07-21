@@ -12,7 +12,7 @@
     "generate": "descriptors/generate-descriptors",
     "lint": "eslint -f unix .",
     "test": "echo No tests defined yet",
-    "start": "env LOGCAT=listen,request,error babel-node --presets=env,stage-2 -- mod-app-manager.js etc/example-config.json"
+    "start": "env LOGCAT=env,listen,request,error babel-node --presets=env,stage-2 -- mod-app-manager.js etc/example-config.json"
   },
   "dependencies": {
     "@octokit/rest": "^19.0.3",

@@ -32,4 +32,9 @@ const configFile = opt.argv[0];
 const config = JSON.parse(fs.readFileSync(configFile).toString());
 logger.log('config', config);
 
+const maybeEnv = (e) => process.env[e] && logger.log('env', `${e}=${process.env[e]}`);
+maybeEnv('LOGGING_CATEGORIES');
+maybeEnv('LOGCAT');
+maybeEnv('OKAPI_URL');
+
 serveModAddStore(logger, opt.options.port, config);
