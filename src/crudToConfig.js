@@ -115,7 +115,9 @@ class CrudToConfig {
 
   async delete(req, id) {
     await this.login(req);
-    await this.okapiFetch(req, `configurations/entries/${id}`, {
+    const path = `configurations/entries/${id}`;
+    console.log('DELETE', path);
+    await this.okapiFetch(req, path, {
       method: 'DELETE',
     });
     // if there was no exception, then we're good to go
