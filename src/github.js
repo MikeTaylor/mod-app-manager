@@ -27,12 +27,19 @@ async function getAppsForSource(source) {
   });
 
   const apps = {};
+  let directory;
 
-  const directory = await octokit.rest.repos.getContent({
-    owner: source.owner,
-    repo: source.repo,
-    path: 'apps',
-  });
+  try {
+    directory = await octokit.rest.repos.getContent({
+      owner: source.owner,
+      repo: source.repo,
+      path: 'apps',
+    });
+  } catch (e) {
+    // XXX for now, just ignore this source, so we can tolerate bad ones
+    // Obviously we will need to do better down the line
+    return {};
+  }
 
   for (const entry of directory.data.values()) {
     const app = await getSingleApp(octokit, source, entry.name);
