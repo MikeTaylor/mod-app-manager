@@ -21,7 +21,7 @@ async function getSingleApp(octokit, source, name) {
 
 
 async function getAppsForSource(source) {
-  console.log('getAppsForSource token =', source.token || (source.tokenStart + source.tokenEnd));
+  console.log('getAppsForSource token =', source.token || (source.tokenStart + source.tokenEnd || ''));
   const octokit = new Octokit({
     auth: source.token || (source.tokenStart + source.tokenEnd),
     userAgent: `FOLIO mod-app-manager v${packageInfo.version}`,
