@@ -38,6 +38,7 @@ async function getAppsForSource(source) {
   } catch (e) {
     // XXX for now, just ignore this source, so we can tolerate bad ones
     // Obviously we will need to do better down the line
+    console.log('oops GitHub', e);
     return {};
   }
 
