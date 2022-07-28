@@ -19,7 +19,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 ## Overview
 
-This module supplies a simple WSAPI on which we can build a prototype Application Manager for FOLIO. Most importantly, it provides lists of candidate apps from a configured set of GitHub repositories. In time, we will provide a WSAPI to maintain that configuration, but for now the static file is used.
+This module supplies a simple WSAPI on which we can build a prototype Application Manager for FOLIO. Most importantly, it provides lists of candidate apps from a configured set of GitHub repositories such as https://github.com/MikeTaylor/example-folio-app-source. Behind the scenes, it maintains the list of GitHub repositiories that are used as sources of apps. By configuring this set of repositories, system administrators can tailor which sets of apps are made available to their users. It can be thought of as analogous to the APT source list in Debian-based Linux distributions (`/etc/apt/sources.list`).
 
 
 ## Invocation
@@ -62,18 +62,16 @@ For example, you might set the categories as follows:
 
 ## Configuration
 
-**XXX this whole section is outdated and needs rewriting**
+The single configuration file named on the command line controls how the module runs. It must be well-formed JSON consisting of a single object. At present, that can contain only a single element, `folioInfo`, which specifies details about the FOLIO system which `mod-app-manager` should run against when contacted directly. It contains the following elements:
 
-The single configuration file named on the command line specifies which GitHub repositiories should be uses as sources of apps. By configuring this, system administrators can tailor which sets of apps are made available to their users. It can be thought of as analogous to the APT source list in Debian-based Linux distributions (`/etc/apt/sources.list`).
+* `url` -- The URL of the Okapi service
+* `tenant` -- The tenant for which to operate
+* `username` -- The name of a user to log in as at the start of the session in order to obtain a token
+* `password` -- The corresponding password
 
-The file must be well-formed JSON consisting of a single array. Each entry in the array specifies a single GitHub source containing application metadata, such as https://github.com/MikeTaylor/example-folio-app-source. Each entry is a JSON object with the following elements:
+Note that these configuration elements are used only when `mod-app-manager` is contacted direcly, not when access to it is mediated via Okapi. In the latter case, the URL, tenant and authentication token are taken from the incoming request (with the exception that the URL can be overridden by the `OKAPI_URL` environment variable, as noted [above](#okapi_url)).
 
-* `owner` -- The owner of the repostitor, e.g. `MikeTaylor`.
-* `repo` -- The name of the repository within the owner's area, e.g. `example-folio-app-source`.
-* `token` -- [A GitHub personal token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) which can be used to access the repository via the GitHub API.
-* `tokenStart` and `tokenEnd` -- If `token` is not provided, then the values of these two fields are concatenated and used as the token. This can be necessary when maintaining a configuration in git, as GitHub automatically revokes any token that it sees in files that are pushed to it.
-
-The distribution includes [An example configuration file](etc/example-config.json).
+The distribution includes [an example configuration file](etc/example-config.json).
 
 
 ## Descriptors
