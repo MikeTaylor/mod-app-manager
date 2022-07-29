@@ -19,7 +19,7 @@ types:
         200:
           body:
             application/json:
-              schema: !include apps.json
+              type: !include apps.json
               example: !include example-apps.json
         500:
           body:
@@ -33,26 +33,26 @@ types:
           200:
             body:
               application/json:
-                schema: !include sources.json
+                type: !include sources.json
                 example: !include example-sources.json
       post:
         description: Create a new source from which apps can be retrieved
         body:
           application/json:
             example: !include example-source.json
-            schema: !include source.json
+            type: !include source.json
         responses:
           201:
             body:
               text/plain:
                 description: The ID of the newly created record. This can be used to address the record using PUT to update it, or DELETE.
-              example: a361b559-ca7c-412e-a4d0-6e4e3fb9320a
+                example: a361b559-ca7c-412e-a4d0-6e4e3fb9320a
       /{id}:
         put:
           description: Update a source from which apps can be retrieved
           body:
             application/json:
-              schema: !include source.json
+              type: !include source.json
               example: !include example-source.json
           responses:
             204:
