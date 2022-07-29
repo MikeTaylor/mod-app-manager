@@ -1,9 +1,8 @@
 # Informal register of issues for `mod-app-manager`
 
-<p style="color:red">
-Note that this is no longer used: all remaining open issues have been moved to
-[the GitHub tracker](https://github.com/MikeTaylor/mod-app-manager/issues).
-</p>
+<span style="color:red">NOTE.</span>
+This list is no longer used: all remaining open issues have been moved to
+[the GitHub tracker](https://github.com/MikeTaylor/mod-app-manager/issues)
 
 * **DONE** -- Generate descriptors from templates
 * **DONE** -- Create a git repo containing FAM files ([`example-folio-app-source`](https://github.com/MikeTaylor/example-folio-app-source))

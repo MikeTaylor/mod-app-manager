@@ -133,5 +133,5 @@ curl -w '\n' -d @target/Activate.json http://localhost:9130/_/proxy/tenants/diku
 
 * [The MAFIA project](https://github.com/MikeTaylor/mafia), of which this is a part.
 * [The FAM (FOLIO Application Metadata) file format](https://github.com/MikeTaylor/mafia/blob/master/doc/folio-app-metadata.md).
-* [Informal register of issues](TODO.md).
+* [The register of issues](https://github.com/MikeTaylor/mod-app-manager/issues).
 
