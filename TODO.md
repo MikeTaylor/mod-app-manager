@@ -32,4 +32,5 @@
 * Consider caching GitHub sources and/or apps
 * Automated tests
 * Searching and sorting of apps
+* Use git (more generally) instead of GitHub (specifically) as source of FAM files
 * Transition to using the GitHub tracker for issues
