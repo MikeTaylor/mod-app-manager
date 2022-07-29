@@ -22,7 +22,6 @@ async function getSingleApp(octokit, source, name) {
 
 async function getAppsForSource(source) {
   const token = source.token || (source.tokenStart + (source.tokenEnd || ''));
-  console.log('getAppsForSource token =', token);
   const octokit = new Octokit({
     auth: token,
     userAgent: `FOLIO mod-app-manager v${packageInfo.version}`,
@@ -40,7 +39,8 @@ async function getAppsForSource(source) {
   } catch (e) {
     // XXX for now, just ignore this source, so we can tolerate bad ones
     // Obviously we will need to do better down the line
-    console.log('oops GitHub', e);
+    // eslint-disable-next-line no-console
+    console.warn(`Skipping source ${source.owner}/${source.repo} due to error`, e);
     return {};
   }
 
