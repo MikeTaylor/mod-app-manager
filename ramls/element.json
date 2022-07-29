@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Element Schema",
+  "description": "An element specified as part of an app",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "`ui` or `backend`: used so that installer software can determine what to do with the package"
+    },
+    "package": {
+      "type": "string",
+      "description": "DEPRECATED"
+    },
+    "repository": {
+      "type": "string",
+      "description": "DEPRECATED"
+    },
+    "url": {
+      "type": "string",
+      "description": "Link to the relevant artifact (e.g. NPM package or Docker container"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "A link to the module descriptor in a FOLIO registry"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "True if the module must be included for the app to function; false if it an optional extra. Default: true"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "descriptor"
+  ]
+}

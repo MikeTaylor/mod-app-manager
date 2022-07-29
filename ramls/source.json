@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "App-source schema",
+  "description": "A source from which app metatdata files can be obtained",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier"
+    },
+    "owner": {
+      "package": "type",
+      "description": "The owner of a GitHub repository"
+    },
+    "repo": {
+      "type": "string",
+      "description": "The name of the repository within the owner's GitHub account"
+    },
+    "token": {
+      "type": "string",
+      "description": "A GitHub API token that can be used to access the repository specified by `owner` and `repo`"
+    },
+    "tokenStart": {
+      "type": "string",
+      "description": "If `token` is not defined, the first part of a token, to be used together with `tokenEnd`"
+    },
+    "tokenEnd": {
+      "type": "string",
+      "description": "If `token` is not defined, the last part of a token, to be used together with `tokenStart`"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "owner",
+    "repo"
+  ]
+}

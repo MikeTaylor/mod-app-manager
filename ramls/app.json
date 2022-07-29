@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "App Schema",
+  "description": "An app that can be installed into a FOLIO system",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Machine-readable name of the app, should generally match the filename"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name of the app, defaults to value of `name` if not specified"
+    },
+    "version": {
+      "type": "string",
+      "description": "Three-faceted version number, subject to Semantic Versioning, which is the version of the app as a whole, not necessarily equal to the version number of any part of it"
+    },
+    "description": {
+      "type": "string",
+      "description": "Longer human-readable description of the app, written in Markdown"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "The organization responsible for publishing the app, expressed as the domain-name of the organization's primary web-site"
+    },
+    "checksum": {
+      "type": "string",
+      "description": "The `elements` array below, rendered into a minified string form and encrypted using the publisher's private key (see above)"
+    },
+    "elements": {
+      "type": "array",
+      "description": "an array describing each of the software elements (UI and backend modules) that make up the app",
+      "items": {
+        "type": "object",
+        "$ref": "element.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "version",
+    "elements"
+  ]
+}
