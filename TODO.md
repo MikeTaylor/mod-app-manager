@@ -1,5 +1,10 @@
 # Informal register of issues for `mod-app-manager`
 
+<p style="color:red">
+Note that this is no longer used: all remaining open issues have been moved to
+[the GitHub tracker](https://github.com/MikeTaylor/mod-app-manager/issues).
+</p>
+
 * **DONE** -- Generate descriptors from templates
 * **DONE** -- Create a git repo containing FAM files ([`example-folio-app-source`](https://github.com/MikeTaylor/example-folio-app-source))
 * **DONE** -- Handle GET on `/admin/health`, returning response code 200
