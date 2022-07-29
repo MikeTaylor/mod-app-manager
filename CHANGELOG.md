@@ -11,6 +11,8 @@
 * Add `env` logging category
 * Upate the Configuration section of the documentation
 * Write RAML and JSON Schemas/examples for the supported web-services
+* Make ID in POST response be of content-type `text/plain` with HTTP 201
+* Make empty DELETE and PUT responses use HTTP status 204
 
 ## [1.1.0](https://github.com/MikeTaylor/mod-app-store/tree/v1.1.0) (2022-07-18)
 

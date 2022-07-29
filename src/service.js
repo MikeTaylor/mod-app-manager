@@ -6,9 +6,10 @@ import CrudToConfig from './crudToConfig';
 
 
 async function serveModAddStore(logger, port, config) {
-  const returnOrReport = async (res, closure, doNotEncode) => {
+  const returnOrReport = async (res, closure, successStatus, doNotEncode) => {
     try {
       const value = await closure();
+      if (successStatus) res.status(successStatus);
       if (doNotEncode) res.contentType('text/plain');
       res.send(doNotEncode ? value : JSON.stringify(value));
     } catch (e) {
@@ -60,18 +61,18 @@ async function serveModAddStore(logger, port, config) {
 
   app.post('/app-manager/config/sources', async (req, res) => {
     const record = req.body;
-    returnOrReport(res, () => c2c.add(req, record), true);
+    returnOrReport(res, () => c2c.add(req, record), 201, true);
   });
 
   app.put('/app-manager/config/sources/:id', async (req, res) => {
     const id = req.params.id;
     const record = req.body;
-    returnOrReport(res, () => c2c.update(req, id, record));
+    returnOrReport(res, () => c2c.update(req, id, record), 204);
   });
 
   app.delete('/app-manager/config/sources/:id', async (req, res) => {
     const id = req.params.id;
-    returnOrReport(res, () => c2c.delete(req, id));
+    returnOrReport(res, () => c2c.delete(req, id), 204);
   });
 
   app.use('/htdocs', express.static('etc/htdocs'), serveIndex('etc/htdocs', { view: 'details' }));
