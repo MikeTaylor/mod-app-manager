@@ -9,6 +9,7 @@ async function serveModAddStore(logger, port, config) {
   const returnOrReport = async (res, closure, doNotEncode) => {
     try {
       const value = await closure();
+      if (doNotEncode) res.contentType('text/plain');
       res.send(doNotEncode ? value : JSON.stringify(value));
     } catch (e) {
       logger.log('error', e);
