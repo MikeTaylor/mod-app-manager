@@ -28,9 +28,3 @@
 * **DONE** -- Write RAML and JSON Schemas/examples for the supported web-services
 * **DONE** -- Make ID in POST response be of content-type `text/plain` with HTTP 201
 * **DONE** -- Make empty DELETE and PUT responses use HTTP status 204
-* Support `_tenant` interface for `loadReference` and `loadSample` operations: see https://folio-project.slack.com/archives/C210RP0T1/p1658220229855719?thread_ts=1657926630.076809&cid=C210RP0T1
-* Consider caching GitHub sources and/or apps
-* Automated tests
-* Searching and sorting of apps
-* Use git (more generally) instead of GitHub (specifically) as source of FAM files
-* Transition to using the GitHub tracker for issues
