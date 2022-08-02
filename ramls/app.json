@@ -30,7 +30,7 @@
     },
     "elements": {
       "type": "array",
-      "description": "an array describing each of the software elements (UI and backend modules) that make up the app",
+      "description": "An array describing each of the software elements (UI and backend modules) that make up the app",
       "items": {
         "type": "object",
         "$ref": "element.json"
