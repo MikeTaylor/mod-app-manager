@@ -1,6 +1,6 @@
 # Change history for mod-app-manager
 
-## [1.2.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.2.0) (IN PROGRESS)
+## [1.2.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.2.0) (2022-08-10)
 
 * Drive `/app-manager/apps` from mod-configuration instead of hardwired config
 * Write Okapi proxying entries for config CRUD WSAPI
