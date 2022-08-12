@@ -1,5 +1,9 @@
 # Change history for mod-app-manager
 
+## [1.3.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.3.0) (IN PROGRESS)
+
+* Update the JSON Schemas and examples for FAM files to match the current [file-format definition](https://github.com/MikeTaylor/mafia/blob/master/doc/folio-app-metadata.md).
+
 ## [1.2.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.2.0) (2022-08-10)
 
 * Drive `/app-manager/apps` from mod-configuration instead of hardwired config
