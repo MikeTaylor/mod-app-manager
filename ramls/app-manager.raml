@@ -25,6 +25,15 @@ types:
           body:
             text/plain:
               description: A brief textual description of what went wrong
+    /{id}:
+      get:
+        description: XXX NOT SUPPORTED, here only for schema validation
+        responses:
+          200:
+            body:
+              application/json:
+                type: !include app.json
+                example: !include example-app.json
   /config:
     /sources:
       get:

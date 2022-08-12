@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Certification Schema",
+  "description": "A certification that the app is asserted to have",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "A short string taken from an enumerated set indicating what is being certified about the app. Almost every app should have `published`; there is a small of other short strings such as `ux` or `i18n`."
+    },
+    "certifier": {
+      "type": "string",
+      "description": "The organization responsible for certifying the app, expressed as the domain-name of the organization's primary web-site."
+    },
+    "signature": {
+      "type": "string",
+      "description": "A cryptographic signature proving that the nominated organization certified the package. This is formed by taking the app file, removing every element of the `certified` array except the one with type `published` (which is part of its identity), rendering the thus reduced file as a minimized JSON string, and encrypting it with the organization's private key."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "certifier",
+    "signature"
+  ]
+}
