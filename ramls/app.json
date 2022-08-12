@@ -35,6 +35,14 @@
         "type": "object",
         "$ref": "element.json"
       }
+    },
+    "certified": {
+      "type": "array",
+      "description": "An array describing each of the certifications this app has received",
+      "items": {
+        "type": "object",
+        "$ref": "certification.json"
+      }
     }
   },
   "additionalProperties": false,
