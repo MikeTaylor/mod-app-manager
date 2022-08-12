@@ -32,6 +32,7 @@
   "additionalProperties": false,
   "required": [
     "type",
-    "descriptor"
+    "descriptor",
+    "url"
   ]
 }
