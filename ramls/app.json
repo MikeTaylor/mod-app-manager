@@ -20,14 +20,6 @@
       "type": "string",
       "description": "Longer human-readable description of the app, written in Markdown"
     },
-    "publisher": {
-      "type": "string",
-      "description": "The organization responsible for publishing the app, expressed as the domain-name of the organization's primary web-site"
-    },
-    "checksum": {
-      "type": "string",
-      "description": "The `elements` array below, rendered into a minified string form and encrypted using the publisher's private key (see above)"
-    },
     "elements": {
       "type": "array",
       "description": "An array describing each of the software elements (UI and backend modules) that make up the app",
