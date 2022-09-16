@@ -46,6 +46,18 @@ async function serveModAddStore(logger, port, config) {
   `);
   });
 
+  app.post('/_/tenant', (req, res) => {
+    const record = req.body;
+    logger.log('tenant', record);
+    res.status(204);
+  });
+
+  app.use('/_/tenant/:id', (req, res) => {
+    const record = req.body;
+    logger.log('tenant', `ID ${req.params.id}`, record);
+    res.status(204);
+  });
+
   app.get('/admin/health', (req, res) => {
     res.send('Behold! I live!!');
   });
