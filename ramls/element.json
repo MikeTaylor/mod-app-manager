@@ -8,14 +8,6 @@
       "type": "string",
       "description": "`ui` or `backend`: used so that installer software can determine what to do with the package"
     },
-    "package": {
-      "type": "string",
-      "description": "DEPRECATED"
-    },
-    "repository": {
-      "type": "string",
-      "description": "DEPRECATED"
-    },
     "url": {
       "type": "string",
       "description": "Link to the relevant artifact (e.g. NPM package or Docker container"
@@ -32,6 +24,7 @@
   "additionalProperties": false,
   "required": [
     "type",
-    "descriptor"
+    "descriptor",
+    "url"
   ]
 }
