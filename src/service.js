@@ -50,12 +50,14 @@ async function serveModAddStore(logger, port, config) {
     const record = req.body;
     logger.log('tenant', record);
     res.status(204);
+    res.send();
   });
 
   app.use('/_/tenant/:id', (req, res) => {
     const record = req.body;
     logger.log('tenant', `ID ${req.params.id}`, record);
     res.status(204);
+    res.send();
   });
 
   app.get('/admin/health', (req, res) => {
