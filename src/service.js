@@ -50,7 +50,8 @@ async function serveModAddStore(logger, port, config) {
   app.post('/_/tenant', (req, res) => {
     const record = JSON.parse(req.body);
     logger.log('tenant', record);
-    if ((record.parameters || []).filter(r => r.key === 'loadSample' && r.value === 'true').length) {
+    if (record.module_to &&
+        (record.parameters || []).filter(r => r.key === 'loadSample' && r.value === 'true').length) {
       loadSampleRecords(logger);
     }
     res.status(204);
