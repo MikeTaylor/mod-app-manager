@@ -3,6 +3,7 @@ import serveIndex from 'serve-index';
 import bodyParser from 'body-parser';
 import getAppsFromGitHub from './github';
 import CrudToConfig from './crudToConfig';
+import loadSampleRecords from './loadSampleRecords';
 
 
 async function serveModAddStore(logger, port, config) {
@@ -47,8 +48,11 @@ async function serveModAddStore(logger, port, config) {
   });
 
   app.post('/_/tenant', (req, res) => {
-    const record = req.body;
+    const record = JSON.parse(req.body);
     logger.log('tenant', record);
+    if ((record.parameters || []).filter(r => r.key === 'loadSample' && r.value === 'true').length) {
+      loadSampleRecords(logger);
+    }
     res.status(204);
     res.send();
   });

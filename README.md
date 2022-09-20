@@ -54,6 +54,8 @@ The following logging categories are used:
 * `listen` -- logs the listen port when the server becomes available to receive connections.
 * `request` -- logs each incoming request's method and path, and the response code and message
 * `error` -- logs errors that are sent back in HTTP 500 responses
+* `tenant` -- logs `_tenant` interface invocations when the module is enabled and disabled
+* `sample` -- logs the loading process for sample records, if requested when the module is enabled
 
 For example, you might set the categories as follows:
 
