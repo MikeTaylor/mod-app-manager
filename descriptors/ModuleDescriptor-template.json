@@ -40,7 +40,8 @@
       "handlers": [
         {
           "methods": ["POST"],
-          "pathPattern": "/_/tenant"
+          "pathPattern": "/_/tenant",
+          "modulePermissions": [ "configuration.entries.item.post", "configuration.entries.item.put" ]
         },
         {
           "methods": ["GET", "DELETE"],

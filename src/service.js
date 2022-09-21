@@ -47,12 +47,12 @@ async function serveModAddStore(logger, port, config) {
   `);
   });
 
-  app.post('/_/tenant', (req, res) => {
+  app.post('/_/tenant', async (req, res) => {
     const record = JSON.parse(req.body);
     logger.log('tenant', record);
     if (record.module_to &&
         (record.parameters || []).filter(r => r.key === 'loadSample' && r.value === 'true').length) {
-      loadSampleRecords(logger);
+      await loadSampleRecords(logger, req, c2c);
     }
     res.status(204);
     res.send();
