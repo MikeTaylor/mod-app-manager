@@ -1,3 +1,10 @@
+// In mod-configuration, the `configName`, `module` and `user` fields
+// together constitute a key (not the primary key, since that is
+// `id`). Since `module` is constant in our records and `user` is not
+// used, that means we need `configName` to be unique, even though we
+// have no use for it otherwise. That is why we generate it using a
+// UUID even though it's not an identifier.
+
 import fetch from 'node-fetch';
 import queryString from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
