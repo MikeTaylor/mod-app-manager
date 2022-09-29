@@ -1,11 +1,21 @@
 import sampleRecords from './sampleRecords';
 
 async function loadSampleRecords(logger, req, c2c) {
-  // eslint-disable-next-line no-console
-  logger.log('sample', 'TODO: add sample records', sampleRecords);
+  logger.log('sample', 'adding sample records', sampleRecords);
+  const existingRecords = await c2c.list(req);
+  const recordsById = {};
+  existingRecords.forEach(record => {
+    recordsById[record.id] = record;
+  });
+
   for (const record of sampleRecords) {
-    const string = JSON.stringify(record);
-    await c2c.add(req, string);
+    if (recordsById[record.id]) {
+      logger.log('sample', 'NOT adding duplicate sample record', record.id);
+    } else {
+      const string = JSON.stringify(record);
+      await c2c.add(req, string);
+      logger.log('sample', 'adding sample record', record);
+    }
   }
 }
 

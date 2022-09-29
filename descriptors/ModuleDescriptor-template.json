@@ -41,7 +41,7 @@
         {
           "methods": ["POST"],
           "pathPattern": "/_/tenant",
-          "modulePermissions": [ "configuration.entries.item.post", "configuration.entries.item.put" ]
+          "modulePermissions": [ "configuration.entries.collection.get", "configuration.entries.item.post", "configuration.entries.item.put" ]
         },
         {
           "methods": ["GET", "DELETE"],
