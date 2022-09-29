@@ -39,7 +39,7 @@ class CrudToConfig {
 
     if (!response.ok) {
       const text = await response.text();
-      throw Error(`Fetch error: ${response.statusText}: ${text}`);
+      throw Error(`Fetch error ${(options || {}).method || 'GET'} ${path}: ${response.statusText}: ${text}`);
     }
 
     return response;
