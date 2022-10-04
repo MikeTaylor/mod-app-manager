@@ -3,6 +3,7 @@
 ## [1.3.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.3.0) (IN PROGRESS)
 
 * Update the JSON Schemas and examples for FAM files to match the current [file-format definition](https://github.com/MikeTaylor/mafia/blob/master/doc/folio-app-metadata.md). Fixes #9.
+* Use `id` from mod-configuration as the app-source ID. Fixes #11.
 
 ## [1.2.0](https://github.com/MikeTaylor/mod-app-manager/tree/v1.2.0) (2022-08-10)
 
