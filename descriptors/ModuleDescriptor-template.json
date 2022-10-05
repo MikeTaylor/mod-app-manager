@@ -32,6 +32,28 @@
           "permissionsRequired": ["app-manager.config.sources.item.delete"]
         }
       ]
+    },
+    {
+      "id": "_tenant",
+      "version": "2.0",
+      "interfaceType": "system",
+      "handlers": [
+        {
+          "methods": ["POST"],
+          "pathPattern": "/_/tenant",
+          "modulePermissions": [ "configuration.entries.collection.get", "configuration.entries.item.post", "configuration.entries.item.put" ]
+        },
+        {
+          "methods": ["GET", "DELETE"],
+          "pathPattern": "/_/tenant/{id}"
+        }
+      ]
+    }
+  ],
+  "requires": [
+    {
+      "id": "configuration",
+      "version": "2.0"
     }
   ],
   "permissionSets": [

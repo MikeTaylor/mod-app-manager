@@ -1,3 +1,16 @@
+// The `id` field from the top-level mod-configuration record is
+// injected into the domain-level app-source record to be the `id`
+// used to address app-sources. When we create a record, the `id` is
+// pulled out of the domain-level record supplied and inserted into
+// the mod-configuration record.
+//
+// In mod-configuration, the `configName`, `module` and `user` fields
+// together constitute a key (not the primary key, since that is
+// `id`). Since `module` is constant in our records and `user` is not
+// used, that means we need `configName` to be unique, even though we
+// have no use for it otherwise. That is why we generate it using a
+// UUID even though it's not an identifier.
+
 import fetch from 'node-fetch';
 import queryString from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
@@ -32,7 +45,7 @@ class CrudToConfig {
 
     if (!response.ok) {
       const text = await response.text();
-      throw Error(`Fetch error: ${response.statusText}: ${text}`);
+      throw Error(`Fetch error ${(options || {}).method || 'GET'} ${path}: ${response.statusText}: ${text}`);
     }
 
     return response;
@@ -72,19 +85,25 @@ class CrudToConfig {
     return json.configs.map(entry => {
       const values = JSON.parse(entry.value);
       return {
-        id: entry.id,
         ...values,
+        id: entry.id,
       };
     });
   }
 
   async add(req, record) {
     await this.login(req);
+
+    const obj = JSON.parse(record);
+    const id = obj.id;
+    delete obj.id;
     const uuid = uuidv4();
+
     const body = {
+      id,
       configName: `${this.prefix}${uuid}`,
       module: this.module,
-      value: record,
+      value: JSON.stringify(obj),
     };
     if (this.user) body.userId = this.user;
 
@@ -98,11 +117,15 @@ class CrudToConfig {
 
   async update(req, id, record) {
     await this.login(req);
+
+    const obj = JSON.parse(record);
+    delete obj.id;
     const uuid = uuidv4(); // It's fine if this changes, we don't use the configName
+
     const body = {
       configName: `${this.prefix}${uuid}`,
       module: this.module,
-      value: record,
+      value: JSON.stringify(obj),
     };
     if (this.user) body.userId = this.user;
 

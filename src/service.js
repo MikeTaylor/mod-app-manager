@@ -3,6 +3,7 @@ import serveIndex from 'serve-index';
 import bodyParser from 'body-parser';
 import getAppsFromGitHub from './github';
 import CrudToConfig from './crudToConfig';
+import loadSampleRecords from './loadSampleRecords';
 
 
 async function serveModAddStore(logger, port, config) {
@@ -44,6 +45,24 @@ async function serveModAddStore(logger, port, config) {
     <li><a href="/target/">Generated descriptors</a></li>
   </ul>
   `);
+  });
+
+  app.post('/_/tenant', async (req, res) => {
+    const record = JSON.parse(req.body);
+    logger.log('tenant', record);
+    if (record.module_to &&
+        (record.parameters || []).filter(r => r.key === 'loadSample' && r.value === 'true').length) {
+      await loadSampleRecords(logger, req, c2c);
+    }
+    res.status(204);
+    res.send();
+  });
+
+  app.use('/_/tenant/:id', (req, res) => {
+    const record = req.body;
+    logger.log('tenant', `ID ${req.params.id}`, record);
+    res.status(204);
+    res.send();
   });
 
   app.get('/admin/health', (req, res) => {
