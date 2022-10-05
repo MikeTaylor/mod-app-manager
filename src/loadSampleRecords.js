@@ -1,7 +1,6 @@
 import sampleRecords from './sampleRecords';
 
 async function loadSampleRecords(logger, req, c2c) {
-  logger.log('sample', 'adding sample records', sampleRecords);
   const existingRecords = await c2c.list(req);
   const recordsById = {};
   existingRecords.forEach(record => {
